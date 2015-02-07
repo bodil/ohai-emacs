@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: commonjs.require
+# key: req
+# --
+var ${3:${1:$(s-lower-camel-case (file-name-nondirectory yas/text))}} = require("${1:module}")$2;$0

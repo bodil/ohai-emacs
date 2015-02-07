@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: ps.foreign
+# key: ffi
+# --
+foreign import ${1:unsafePerformIO} """
+  function $1($3) {
+    $0
+  }""" :: $2

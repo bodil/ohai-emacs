@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: ps.eff
+# key: eff
+# --
+Eff (${2:${1:$(lower-camel-case yas-text)}} :: ${1:DOM} | e)

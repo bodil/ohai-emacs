@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: org.header
+# key: title
+# --
+#+TITLE: $1
+#+AUTHOR: Bodil Stokke
+#+EMAIL: bodil@bodil.org
+$0
