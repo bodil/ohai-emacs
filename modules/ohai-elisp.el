@@ -21,7 +21,7 @@
 ;;; Code:
 
 (require 'ohai-package)
-(require 'ohai-startup-wizard)
+(require 'ohai-personal-taste)
 
 ;; If you're ready for Paredit, let's do Paredit!
 ;; Learn Paredit: http://pub.gajendra.net/src/paredit-refcard.pdf

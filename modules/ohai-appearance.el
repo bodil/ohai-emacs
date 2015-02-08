@@ -21,7 +21,7 @@
 ;;; Code:
 
 (require 'ohai-package)
-(require 'ohai-startup-wizard)
+(require 'ohai-personal-taste)
 
 (require 'term)
 
@@ -194,3 +194,4 @@
 
 
 (provide 'ohai-appearance)
+;;; ohai-appearance.el ends here

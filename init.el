@@ -41,12 +41,16 @@
 (setq autoload-file (concat dotfiles-dir "loaddefs.el"))
 (setq custom-file (concat dotfiles-dir "custom.el"))
 
+;; Load the user settings from `custom.el`.
+(load custom-file 'noerror)
+
 
 
 ;; List all the modules we want to use, in order.
 ;; You should comment out modules you won't be needing.
 (setq ohai-module-list
       '(
+        ohai-personal-taste ; Ohai Emacs configuration settings (required)
         ohai-startup-wizard ; first run setup (no effect if run already)
         ohai-package        ; initialise package management
         ohai-appearance     ; how Emacs looks
@@ -74,8 +78,3 @@
 
 ;; Go through the list and load each module.
 (dolist (module ohai-module-list) (require module))
-
-;; When everything else is done, we load the user settings from `custom.el`.
-;; This should always come right at the end of init.el, or its settings might
-;; be overwritten by your `.el` files.
-(load custom-file 'noerror)

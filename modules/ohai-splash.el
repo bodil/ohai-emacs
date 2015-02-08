@@ -21,7 +21,7 @@
 ;;; Code:
 
 (require 'ohai-package)
-(require 'ohai-startup-wizard)
+(require 'ohai-personal-taste)
 
 (setq ohai-splash/sources
       (cond
