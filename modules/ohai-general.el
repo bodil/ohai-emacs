@@ -43,4 +43,7 @@
 (delete-selection-mode t)
 (transient-mark-mode t)
 
+;; Automatically update unmodified buffers whose files have changed.
+(global-auto-revert-mode 1)
+
 (provide 'ohai-general)
