@@ -85,11 +85,6 @@
     (exchange-point-and-mark)))
 (global-set-key (kbd "C-M-<end>") 'duplicate-start-of-line-or-region)
 
-;; Some bindings for special characters
-(global-set-key (kbd "M-l") (lambda () (interactive) (insert "\u03bb"))) ;lambda
-(global-set-key (kbd "M-f") (lambda () (interactive) (insert "\u0192"))) ;florin
-(global-set-key (kbd "M--") (lambda () (interactive) (insert "\u2192"))) ;arrow
-
 ;; Hack for setting a fixed wrap column in visual-line-mode.
 (defun set-visual-wrap-column (new-wrap-column &optional buffer)
   "Force visual line wrap at NEW-WRAP-COLUMN in BUFFER (defaults

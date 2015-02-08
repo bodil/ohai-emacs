@@ -27,7 +27,7 @@
 
 ;; Use C-\ to activate the Company autocompleter.
 (require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
+(global-company-mode)
 (global-set-key (kbd "C-\\") 'company-complete)
 
 (setq company-global-modes '(not term-mode))

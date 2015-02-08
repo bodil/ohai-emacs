@@ -80,11 +80,11 @@
   (run-hooks 'ohai-appearance/hook)
   (run-hooks 'ohai-appearance/dark-hook))
 
-;; Setup hooks to re-run after init.el has completed, allowing
+;; Setup hooks to re-run after all modules have loaded, allowing
 ;; other modules to tweak the theme without having to wait
 ;; until they're loaded to switch to it.
 (add-hook
- 'after-init-hook
+ 'ohai/modules-loaded-hook
  (lambda ()
    (run-hooks 'ohai-appearance/hook)
    (cond
@@ -96,9 +96,6 @@
 ;; Maximise the Emacs frame if that's how you like it.
 (if (equal ohai-personal-taste/window-state 'maximised)
     (set-frame-parameter nil 'fullscreen 'maximized))
-
-;; Skip the default splash screen.
-(setq inhibit-startup-message t)
 
 ;; Don't defer screen updates when performing operations.
 (setq redisplay-dont-pause t)
@@ -185,11 +182,15 @@
 (global-anzu-mode 1)
 
 ;; Install the colour scheme according to personal taste.
-(cond
- ((equal ohai-personal-taste/style 'dark)
-  (ohai-appearance/dark))
- ((equal ohai-personal-taste/style 'light)
-  (ohai-appearance/light)))
+(defun ohai-appearance/apply-style ()
+  (interactive)
+  (cond
+   ((equal ohai-personal-taste/style 'dark)
+    (ohai-appearance/dark))
+   ((equal ohai-personal-taste/style 'light)
+    (ohai-appearance/light))))
+
+(ohai-appearance/apply-style)
 
 
 

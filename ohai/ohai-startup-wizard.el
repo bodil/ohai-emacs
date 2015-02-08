@@ -107,7 +107,9 @@ speakers)."
    'ohai-personal-taste/training-wheels
    (ohai-startup-wizard/get-training-wheels))
 
-  (customize-save-variable 'ohai-personal-taste/run-wizard nil))
+  (customize-save-variable 'ohai-personal-taste/run-wizard nil)
+  (setq ohai/wizard-did-run t)
+  (ohai/select-modules))
 
 (when ohai-personal-taste/run-wizard
   (ohai-startup-wizard))

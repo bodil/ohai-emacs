@@ -125,6 +125,7 @@
 
 (defun ohai-splash/inject-picture (img)
   (with-current-buffer (get-buffer "*scratch*")
+    (end-of-buffer)
     (move-beginning-of-line nil)
     (kill-line)
     (insert-image img "ohai")
@@ -142,6 +143,10 @@
 (when window-system
   (setq initial-buffer-choice 'ohai-splash/go))
 
+;; A hack here to force the splash screen after the first run wizard's
+;; module selection, as `initial-buffer-choice' will already have run.
+(when (boundp 'ohai/wizard-did-run)
+  (ohai-splash/go))
 
 
 (provide 'ohai-splash)

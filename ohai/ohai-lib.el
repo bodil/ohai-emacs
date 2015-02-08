@@ -35,6 +35,16 @@
 
 
 
+(defun ohai/font-lock-replace-symbol (mode reg sym)
+  "Given a major mode `mode', replace the regular expression `reg' with
+the symbol `sym' when rendering."
+  (font-lock-add-keywords
+   mode `((,reg
+           (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                     ,sym 'decompose-region)))))))
+
+
+
 (defun ohai/exec (command)
   "Run a shell command and return its output as a string, whitespace trimmed."
   (s-trim (shell-command-to-string command)))
