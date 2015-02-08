@@ -58,6 +58,7 @@
         ohai-complete       ; auto completion
         ohai-snippets       ; snippet management
         ohai-codestyle      ; code formatting, whitespace management
+        ohai-dired          ; enhanced file manager
         ohai-project        ; manage projects with Projectile
         ohai-flycheck       ; run linters automatically with Flycheck
         ohai-git            ; Git tools
