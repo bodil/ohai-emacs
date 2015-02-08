@@ -3,7 +3,7 @@
 # key: doc
 # --
 ;;; -*- lexical-binding: t -*-
-;;; ${1:filename}.el --- ${2:This is an Emacs Lisp file with Emacs Lisp code.}
+;;; ${1:`(f-base (buffer-file-name))`}.el --- ${2:This is an Emacs Lisp file with Emacs Lisp code.}
 
 ;; Copyright (C) `(format-time-string "%Y")` `(ohai/user-full-name)`
 
