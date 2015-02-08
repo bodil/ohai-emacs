@@ -21,16 +21,13 @@
 ;;; Code:
 
 (require 'ohai-package)
-
-(package-require 's)
-(require 's)
+(require 'ohai-lib)
 
 ;; If npm is installed, add its local prefix to the executable
 ;; search path, which helps Emacs find linters etc.
 ;; This isn't Windows compatible, but then neither is npm, really.
-(when (file-executable-p (s-trim (shell-command-to-string "which npm")))
-  (let ((npm-prefix (s-trim (shell-command-to-string "npm config get prefix"))))
-    (setenv "PATH" (concat npm-prefix "/bin:" (getenv "PATH")))))
+(-when-let (npm-prefix (ohai/exec-if-exec "npm" "config get prefix"))
+  (setenv "PATH" (concat npm-prefix "/bin:" (getenv "PATH"))))
 
 ;; Install js2-mode, which improves on Emacs's default JS mode
 ;; tremendously.
@@ -61,10 +58,7 @@
 
 ;; Locate the Tern binary by querying the system search path, which
 ;; should now include the local npm prefix.
-(setq tern-command
-      (list
-       (let ((which (s-trim (shell-command-to-string "which tern"))))
-         (if (file-executable-p which) which "tern"))))
+(setq tern-command (list (or (ohai/resolve-exec "tern") "tern")))
 
 ;; Setup Tern as an autocomplete source.
 (with-eval-after-load "company"
