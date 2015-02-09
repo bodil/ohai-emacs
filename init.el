@@ -32,7 +32,7 @@
 ;; Figure out the path to our .emacs.d by getting the path part of the
 ;; current file (`init.el`).
 (setq dotfiles-dir (file-name-directory
-                    (or (buffer-file-name) load-file-name)))
+                    (or (buffer-file-name) (file-chase-links load-file-name))))
 
 ;; We need to tell Emacs where to find Ohai Emacs's library packages.
 (add-to-list 'load-path (concat dotfiles-dir "ohai"))
