@@ -72,3 +72,6 @@ Your installed Emacs reports:
 
 ;; Load the enabled modules.
 (when (not (boundp 'ohai/wizard-did-run)) (ohai/load-modules))
+
+;; Load the user's config, if it exists.
+(load (concat dotfiles-dir "user.el") 'noerror)
