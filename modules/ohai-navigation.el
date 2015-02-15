@@ -51,10 +51,10 @@
 (package-require 'ace-window)
 (global-set-key (kbd "C-x o") 'ace-window)
 
-;; Use C-x p to kill the buffer in the other window, revealing
+;; Use C-x M-p to kill the buffer in the other window, revealing
 ;; the next buffer in the stack.
 (global-set-key
- (kbd "C-x p")
+ (kbd "C-x M-p")
  (lambda () (interactive)
    (save-excursion
      (other-window 1)
