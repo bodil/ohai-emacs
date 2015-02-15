@@ -63,5 +63,5 @@
    (set-face-foreground 'company-tooltip-annotation "#00008e")))
 
 
- 
+
 (provide 'ohai-complete)

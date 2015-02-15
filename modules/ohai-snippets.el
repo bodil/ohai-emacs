@@ -33,6 +33,6 @@
 (yas-global-mode 1)
 
 
- 
+
 (provide 'ohai-snippets)
 ;;; ohai-snippets.el ends here
