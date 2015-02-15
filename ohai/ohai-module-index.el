@@ -42,7 +42,8 @@
    (ohai-javascript "Javascript" :optional)
    (ohai-html "HTML, CSS and friends" :optional)
    (ohai-markdown "Markdown" :optional)
-   (ohai-purescript "Purescript" :optional)))
+   (ohai-purescript "Purescript" :optional)
+   (ohai-clojure "Clojure" :optional)))
 
 (defcustom ohai/modules (-map 'car
                               (-filter (lambda (i) (equal :recommended (caddr i)))
