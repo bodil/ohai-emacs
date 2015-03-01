@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: flow.importType
+# key: impt
+# binding: direct-keybinding
+# --
+import type { ${1:Type} } from "${2:module}";$0
