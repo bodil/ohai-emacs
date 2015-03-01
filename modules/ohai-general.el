@@ -46,4 +46,10 @@
 ;; Automatically update unmodified buffers whose files have changed.
 (global-auto-revert-mode 1)
 
+;; If available, use `xdg-open' to open URLs.
+(when (ohai/is-exec "xdg-open")
+  (setq-default
+   browse-url-browser-function (quote browse-url-generic)
+   browse-url-generic-program "xdg-open"))
+
 (provide 'ohai-general)
