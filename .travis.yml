@@ -5,5 +5,5 @@ install:
     sudo apt-get -qq install emacs-snapshot
 
 script:
-  - ln -s . .emacs.d
+  - ln -s . .emacs.d &&
     HOME=`pwd` emacs --batch -Q --eval "(load-file \"ohai/ohai-test.el\")"
