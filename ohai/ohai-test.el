@@ -20,13 +20,15 @@
 
 ;;; Code:
 
-(load-file "$HOME/ohai-emacs/ohai/ohai-module-index.el")
+;; Should be run from the repo with HOME=`pwd`.
+
+(load-file "$HOME/ohai/ohai-module-index.el")
 
 (setq ohai-personal-taste/paredit t
       ohai-personal-taste/run-wizard nil
       ohai/modules (mapcar #'car ohai/available-modules))
 
-(load-file "$HOME/ohai-emacs/init.el")
+(load-file "$HOME/init.el")
 
 (kill-emacs 0)
 
