@@ -43,7 +43,8 @@
    (ohai-html "HTML, CSS and friends" :optional)
    (ohai-markdown "Markdown" :optional)
    (ohai-purescript "Purescript" :optional)
-   (ohai-clojure "Clojure" :optional)))
+   (ohai-clojure "Clojure" :optional)
+   (ohai-haskell "Haskell" :optional)))
 
 (require 'cl)
 (defcustom ohai/modules (mapcar #'car

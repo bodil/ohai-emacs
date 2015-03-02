@@ -39,8 +39,7 @@
   (ohai/font-lock-replace-symbol 'purescript-mode "\\(=>\\)" "⇒")
   (define-key purescript-mode-map (kbd "→") (lambda () (interactive) (insert "->")))
   (define-key purescript-mode-map (kbd "←") (lambda () (interactive) (insert "<-")))
-  (define-key purescript-mode-map (kbd "⇒") (lambda () (interactive) (insert "=>")))
-  )
+  (define-key purescript-mode-map (kbd "⇒") (lambda () (interactive) (insert "=>"))))
 
 ;; Define a Flycheck checker for running the PureScript compiler through Pulp.
 (with-eval-after-load "flycheck"
