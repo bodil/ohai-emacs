@@ -1,8 +1,8 @@
 install:
-  - sudo add-apt-repository -y ppa:fryda.tomas/emacs &&
+  - sudo add-apt-repository -y ppa:ubuntu-elisp/ppa &&
     sudo apt-get -qq update &&
     sudo apt-get -qq -f install &&
-    sudo apt-get -qq install emacs24 emacs24-el
+    sudo apt-get -qq install emacs-snapshot
 
 script:
   - ln -s . .emacs.d
