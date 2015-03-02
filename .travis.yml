@@ -1,0 +1,9 @@
+install:
+  - sudo add-apt-repository -y ppa:fryda.tomas/emacs &&
+    sudo apt-get -qq update &&
+    sudo apt-get -qq -f install &&
+    sudo apt-get -qq install emacs24 emacs24-el
+
+script:
+  - ln -s . .emacs.d
+    HOME=`pwd` emacs --batch -Q --eval "(load-file \"ohai/ohai-test.el\")"

@@ -45,9 +45,11 @@
    (ohai-purescript "Purescript" :optional)
    (ohai-clojure "Clojure" :optional)))
 
-(defcustom ohai/modules (-map 'car
-                              (-filter (lambda (i) (equal :recommended (caddr i)))
-                                       ohai/available-modules))
+(require 'cl)
+(defcustom ohai/modules (mapcar #'car
+                                (remove-if-not
+                                 (lambda (i) (equal :recommended (caddr i)))
+                                 ohai/available-modules))
   "Your choice of Ohai Emacs modules.")
 
 (defun ohai/load-modules ()
