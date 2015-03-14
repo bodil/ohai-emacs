@@ -22,6 +22,14 @@
 
 (require 'ohai-package)
 
+(package-require 'guide-key)
+(setq-default guide-key/guide-key-sequence t
+              guide-key/recursive-key-sequence-flag t
+              guide-key/idle-delay 2
+              guide-key/popup-window-position 'bottom
+              guide-key/text-scale-amount -2)
+(guide-key-mode 1)
+
 ;; Get an instant cheat sheet for your current major mode
 ;; with C-h C-m.
 (package-require 'discover-my-major)
