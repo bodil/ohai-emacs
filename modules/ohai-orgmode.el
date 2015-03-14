@@ -32,6 +32,15 @@
    (visual-line-mode 1)
    (set-visual-wrap-column 80)))
 
+;; Fancy bullet rendering.
+(package-require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+;; Insert links from clipboard.
+(package-require 'org-cliplink)
+(with-eval-after-load "org"
+  (define-key org-mode-map (kbd "C-c M-l") 'org-cliplink))
+
 
 
 (provide 'ohai-orgmode)
