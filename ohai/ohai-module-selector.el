@@ -39,6 +39,7 @@
           (lambda (&rest ignore)
             (interactive)
             (customize-save-variable 'ohai/modules selected-modules)
+            (package-refresh-contents)
             (ohai/load-modules)
             (kill-buffer))))
 
