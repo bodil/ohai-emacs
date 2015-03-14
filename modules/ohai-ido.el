@@ -46,6 +46,13 @@
 (package-require 'ido-vertical-mode)
 (ido-vertical-mode)
 
+;; Improved fuzzy matching.
+(package-require 'flx-ido)
+(flx-ido-mode 1)
+(setq ido-enable-flex-matching t
+      ido-use-faces nil
+      gc-cons-threshold 20000000)
+
 ;; Bind C-t to use ido to jump to a symbol in the current buffer.
 (require 'imenu)
 (defun ido-imenu ()
