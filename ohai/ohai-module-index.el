@@ -37,6 +37,7 @@
    (ohai-flycheck "run linters automatically with Flycheck" :recommended)
    (ohai-git "Git tools" :recommended)
    (ohai-orgmode "your personal everything manager" :recommended)
+   (ohai-swiper "improved incremental search" :recommended)
    (ohai-help "ways to get more help" :recommended)
    (ohai-elisp "Emacs Lisp" :recommended)
    (ohai-javascript "Javascript" :optional)
