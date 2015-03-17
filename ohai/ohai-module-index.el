@@ -40,6 +40,7 @@
    (ohai-swiper "improved incremental search" :recommended)
    (ohai-help "ways to get more help" :recommended)
    (ohai-elisp "Emacs Lisp" :recommended)
+   (ohai-helm "advanced selection and narrowing" :optional)
    (ohai-javascript "Javascript" :optional)
    (ohai-html "HTML, CSS and friends" :optional)
    (ohai-markdown "Markdown" :optional)
