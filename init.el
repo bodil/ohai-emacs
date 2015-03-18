@@ -67,6 +67,7 @@ Your installed Emacs reports:
 (require 'ohai-package)
 (require 'ohai-module-index)
 (require 'ohai-module-selector)
+(require 'ohai-update)
 (require 'ohai-personal-taste)
 (require 'ohai-startup-wizard)
 
