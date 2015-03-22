@@ -33,6 +33,7 @@
 (global-set-key (kbd "C-x c g") 'helm-google-suggest)
 
 (with-eval-after-load "ohai-project"
+  (package-require 'helm-projectile)
   (global-set-key (kbd "C-c C-f") 'helm-projectile-find-file-dwim))
 
 (helm-autoresize-mode 1)
