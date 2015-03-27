@@ -1,9 +1,9 @@
 ;;; -*- lexical-binding: t -*-
 ;;; ohai-erlang.el --- Things for working with erlang.
 
-;; Copyright (C) 2015
+;; Copyright (C) 2015 Bodil Stokke
 
-;; Author: Bernard Notarianni
+;; Curated and improved by Bernard Notarianni
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
