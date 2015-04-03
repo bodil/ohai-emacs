@@ -46,6 +46,7 @@
    (ohai-markdown "Markdown" :optional)
    (ohai-purescript "Purescript" :optional)
    (ohai-clojure "Clojure" :optional)
+   (ohai-erlang "Erlang" :optional)
    (ohai-haskell "Haskell" :optional)))
 
 (require 'cl)
