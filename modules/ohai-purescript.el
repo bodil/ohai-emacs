@@ -46,7 +46,7 @@
   (flycheck-define-checker
    pulp
    "Use Pulp to flycheck PureScript code."
-   :command ("pulp" "build" "--monochrome")
+   :command ("pulp" "--monochrome" "build")
    :error-patterns
    ((error line-start
            (or (and "Error at " (file-name)    " line " line ", column " column ":"
