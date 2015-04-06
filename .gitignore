@@ -12,3 +12,5 @@
 /.mc-lists.el
 /user.el
 /var/
+/tramp
+/url/
