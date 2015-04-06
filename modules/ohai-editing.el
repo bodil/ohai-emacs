@@ -117,6 +117,13 @@
         (set-window-margins nil (car current-margins)
                             (- current-available visual-wrap-column))))))
 
+;; A function for easily editing a file as root through TRAMP.
+(defun sudo-edit (&optional arg)
+  (interactive "p")
+  (if (or arg (not buffer-file-name))
+      (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
+    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
 
 
 (provide 'ohai-editing)
