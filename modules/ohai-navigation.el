@@ -60,6 +60,10 @@
      (other-window 1)
      (quit-window))))
 
+;; Display incremental search stats in the modeline.
+(package-require 'anzu)
+(global-anzu-mode 1)
+
 
 
 (provide 'ohai-navigation)
