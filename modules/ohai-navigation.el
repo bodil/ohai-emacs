@@ -23,11 +23,13 @@
 ;; Make PgUp/Dn move the point.
 (setq scroll-error-top-bottom t)
 
-;; ace-jump-mode!
-(package-require 'ace-jump-mode)
-(global-set-key (kbd "C-;") 'ace-jump-mode)
-(eval-after-load "ace-jump-mode"
-  '(ace-jump-mode-enable-mark-sync))
+;; Avy is a quick way to jump around your buffers.
+;; https://github.com/abo-abo/avy
+(package-require 'avy)
+(global-set-key (kbd "C-;") 'avy-goto-word-1)
+(global-set-key (kbd "C-:") 'avy-goto-char)
+(with-eval-after-load "isearch"
+  (define-key isearch-mode-map (kbd "C-;") 'avy-isearch))
 
 ;; Smart home key.
 (defun smart-beginning-of-line ()
