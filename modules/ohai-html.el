@@ -43,13 +43,6 @@
 ;; Highlight the element under the cursor.
 (setq-default web-mode-enable-current-element-highlight t)
 
-;; Tagedit is a Paredit like extension for SGML-like modes.
-;; Learn about Tagedit: https://github.com/magnars/tagedit
-(package-require 'tagedit)
-(with-eval-after-load "web-mode"
-  (tagedit-add-paredit-like-keybindings)
-  (add-hook 'web-mode-hook (lambda () (tagedit-mode 1))))
-
 ;; Key for renaming tags
 (with-eval-after-load "web-mode"
   (define-key web-mode-map (kbd "C-c C-r") 'mc/mark-sgml-tag-pair))
