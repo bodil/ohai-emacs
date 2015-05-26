@@ -1,6 +1,6 @@
 # -*- mode: snippet; require-final-newline: nil -*-
 # name: org.header
-# key: title
+# key: doc
 # --
 #+TITLE: $1
 #+AUTHOR: Bodil Stokke
