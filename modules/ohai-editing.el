@@ -127,6 +127,11 @@
                            (ido-read-file-name "File: "))))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
+;; A key for intelligently shrinking whitespace.
+;; See https://github.com/jcpetkovich/shrink-whitespace.el for details.
+(package-require 'shrink-whitespace)
+(global-set-key (kbd "C-c DEL") 'shrink-whitespace)
+
 
 
 (provide 'ohai-editing)
