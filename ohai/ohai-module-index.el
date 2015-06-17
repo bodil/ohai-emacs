@@ -41,6 +41,7 @@
    (ohai-help "ways to get more help" :recommended)
    (ohai-elisp "Emacs Lisp" :recommended)
    (ohai-helm "advanced selection and narrowing" :optional)
+   (ohai-eshell "the native Emacs shell" :optional)
    (ohai-html "HTML, CSS and friends" :optional)
    (ohai-markdown "Markdown support" :optional)
    (ohai-javascript "JavaScript language support" :optional)
