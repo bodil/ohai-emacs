@@ -22,7 +22,6 @@
 
 (require 'ohai-lib)
 (require 'ohai-project)
-(require 'ohai-javascript)
 
 ;; Install purescript-mode.
 (package-require 'purescript-mode)
