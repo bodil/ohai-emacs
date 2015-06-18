@@ -45,6 +45,7 @@
                       :weight 'bold)
   (set-face-foreground 'which-func "#3cb64a")
   (set-face-attribute 'linum nil :height 0.7)
+  (set-face-attribute 'linum-highlight-face nil :foreground nil :background "#ddd" :height 0.7)
 
   (set-face-foreground 'term-color-black "#ffffff")
   (set-face-foreground 'term-color-red "#f5666d")
@@ -66,6 +67,7 @@
   (set-face-background 'region "#374186")
   (set-face-background 'fringe "#191919")
   (set-face-attribute 'linum nil :background nil :height 0.7)
+  (set-face-attribute 'linum-highlight-face nil :foreground "white" :background "#363636" :height 0.7)
   (set-face-foreground 'which-func "#7f9f7f")
 
   (set-face-foreground 'term-color-black "#3f3f3f")
@@ -110,6 +112,10 @@
 ;; Show line numbers in buffers.
 (global-linum-mode t)
 (setq linum-format (if (not window-system) "%4d " "%4d"))
+
+;; Highlight the line number of the current line.
+(package-require 'hlinum)
+(hlinum-activate)
 
 ;; Show column numbers in modeline.
 (setq column-number-mode t)
