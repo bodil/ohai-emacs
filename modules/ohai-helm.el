@@ -24,20 +24,31 @@
 (require 'helm-config)
 (require 'helm)
 
+;; Activate Helm.
 (helm-mode 1)
 
+;; Replace common selectors with Helm versions.
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x C-g") 'helm-do-grep)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 (global-set-key (kbd "C-x c g") 'helm-google-suggest)
 
+;; A binding for using Helm to pick files using Projectile.
 (with-eval-after-load "ohai-project"
   (package-require 'helm-projectile)
   (global-set-key (kbd "C-c C-f") 'helm-projectile-find-file-dwim))
 
+;; Enrich isearch with Helm using the `C-S-s' binding.
+;; swiper-helm behaves subtly different from isearch, so let's not
+;; override the default binding.
+(package-require 'swiper-helm)
+(global-set-key (kbd "C-S-s") 'swiper-helm)
+
+;; Tell Helm to resize the selector as needed.
 (helm-autoresize-mode 1)
 
+;; Make Helm look nice.
 (setq-default helm-display-header-line nil
               helm-autoresize-min-height 10
               helm-autoresize-max-height 35
