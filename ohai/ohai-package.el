@@ -34,12 +34,10 @@
 
 ;; Emacs comes with a package manager for installing more features.
 ;; The default package repository doesn't contain much, so we tell it
-;; to use a few more: MELPA and Marmalade.
+;; to use MELPA as well.
 (setq package-user-dir (concat dotfiles-dir "elpa"))
 (require 'package)
-(dolist (source '(("melpa" . "http://melpa.org/packages/")
-                  ("marmalade" . "http://marmalade-repo.org/packages/")))
-  (add-to-list 'package-archives source t))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
 ;; To get the package manager going, we invoke its initialise function.
 (package-initialize)
