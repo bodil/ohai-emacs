@@ -34,10 +34,12 @@
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 (global-set-key (kbd "C-x c g") 'helm-google-suggest)
 
-;; A binding for using Helm to pick files using Projectile.
+;; A binding for using Helm to pick files using Projectile,
+;; and override the normal grep with a Projectile based grep.
 (with-eval-after-load "ohai-project"
   (package-require 'helm-projectile)
-  (global-set-key (kbd "C-c C-f") 'helm-projectile-find-file-dwim))
+  (global-set-key (kbd "C-c C-f") 'helm-projectile-find-file-dwim)
+  (global-set-key (kbd "C-x C-g") 'helm-projectile-grep))
 
 ;; Enrich isearch with Helm using the `C-S-s' binding.
 ;; swiper-helm behaves subtly different from isearch, so let's not
