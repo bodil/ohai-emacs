@@ -52,4 +52,8 @@
    browse-url-browser-function (quote browse-url-generic)
    browse-url-generic-program "xdg-open"))
 
+;; Load the Paradox interface for package management.
+;; To use it, type `M-x paradox-list-packages'.
+(package-require 'paradox)
+
 (provide 'ohai-general)
