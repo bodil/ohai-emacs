@@ -48,15 +48,23 @@
 (when (online?)
   (unless package-archive-contents (package-refresh-contents)))
 
+;; `Paradox' is an enhanced interface for package management, which also
+;; provides some helpful utility functions we're going to be using
+;; extensively. Thus, the first thing we do is install it if it's not there
+;; already.
+(when (not (package-installed-p 'paradox))
+  (package-install 'paradox))
+
 ;; We're going to try to declare the packages each feature needs as we
 ;; define it. To do this, we define a function `(package-require)`
 ;; which will fetch and install a package from the repositories if it
 ;; isn't already installed. Eg. to ensure the hypothetical package
 ;; `ponies` is installed, you'd call `(package-require 'ponies)`.
+;; This is just a wrapper for `paradox-require', which we might be using
+;; directly except we don't right now.
 (defun package-require (pkg)
   "Install a package only if it's not already installed."
-  (when (not (package-installed-p pkg))
-    (package-install pkg)))
+  (paradox-require pkg))
 
 
 

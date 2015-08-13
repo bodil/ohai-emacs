@@ -50,6 +50,10 @@
 (setq company-quickhelp-delay 1)
 (company-quickhelp-mode 1)
 
+;; Add a completion source for emoji. 😸
+(package-require 'company-emoji)
+(company-emoji-init)
+
 ;; Company's default colours look OK with the light scheme,
 ;; but hideous with the dark one, so let's pick something nicer.
 (add-hook
