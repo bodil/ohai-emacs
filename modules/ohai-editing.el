@@ -35,6 +35,11 @@
 (global-set-key (kbd "C-\"") 'mc/mark-all-like-this-dwim)
 (global-set-key (kbd "C-M-'") 'mc/edit-lines)
 
+;; MC has `mc-hide-unmatched-lines-mode' bound to C-', which interferes
+;; with our ability to add more cursors, so we'll just clear the binding.
+;; TODO: add `mc-hide-unmatched-lines-mode' back somewhere else?
+(define-key mc/keymap (kbd "C-'") nil)
+
 ;; Use C-= to select the innermost logical unit your cursor is on.
 ;; Keep hitting C-= to expand it to the next logical unit.
 ;; Protip: this goes really well with multiple cursors.
