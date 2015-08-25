@@ -66,6 +66,12 @@
 (package-require 'anzu)
 (global-anzu-mode 1)
 
+;; Anzu provides a version of `query-replace' and friends which give visual
+;; feedback when composing regexps. Let's replace the regular versions.
+(global-set-key (kbd "C-%") 'anzu-query-replace-at-cursor)
+(global-set-key (kbd "M-%") 'anzu-query-replace)
+(global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
+
 
 
 (provide 'ohai-navigation)
