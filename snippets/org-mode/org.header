@@ -3,6 +3,6 @@
 # key: doc
 # --
 #+TITLE: $1
-#+AUTHOR: Bodil Stokke
-#+EMAIL: bodil@bodil.org
+#+AUTHOR: `(ohai/user-full-name)`
+#+EMAIL: `(ohai/user-email)`
 $0
