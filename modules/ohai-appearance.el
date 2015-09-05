@@ -62,12 +62,17 @@
 ;; Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
   (interactive)
-  (load-theme 'wombat)
+  (package-require 'material-theme)
+  (load-theme 'material)
 
   (set-face-background 'region "#374186")
   (set-face-background 'fringe "#191919")
-  (set-face-attribute 'linum nil :background nil :height 0.7)
-  (set-face-attribute 'linum-highlight-face nil :foreground "white" :background "#363636" :height 0.7)
+  (set-face-attribute
+   'linum nil
+   :foreground "#678" :background "#1e2125" :height 0.9)
+  (set-face-attribute
+   'linum-highlight-face nil
+   :foreground "#96989c" :background "#263238" :height 0.9)
   (set-face-foreground 'which-func "#7f9f7f")
 
   (set-face-foreground 'term-color-black "#3f3f3f")
