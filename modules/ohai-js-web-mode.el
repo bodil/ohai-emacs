@@ -55,6 +55,11 @@
   (require 'company-tern)
   (add-to-list 'company-backends 'company-tern))
 
+;; Let Flycheck know that we're using web-mode for JS.
+(with-eval-after-load "flycheck"
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (setq flycheck-javascript-eslint-executable (or (ohai/resolve-exec "eslint") "eslint")))
+
 
 
 (provide 'ohai-js-web-mode)
