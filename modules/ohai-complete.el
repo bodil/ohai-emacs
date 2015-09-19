@@ -25,13 +25,14 @@
 
 (package-require 'company)
 
-;; Use C-\ to activate the Company autocompleter.
+;; Enable company-mode globally.
 (require 'company)
 (global-company-mode)
-(global-set-key (kbd "C-\\") 'company-complete)
 
+;; Except when you're in term-mode.
 (setq company-global-modes '(not term-mode))
 
+;; Give Company a decent default configuration.
 (setq company-minimum-prefix-length 2
       company-selection-wrap-around t
       company-show-numbers t
@@ -67,6 +68,13 @@
    (set-face-foreground 'company-tooltip-common "#9a0000")
    (set-face-foreground 'company-tooltip-common-selection "#9a0000")
    (set-face-foreground 'company-tooltip-annotation "#00008e")))
+
+;; Use C-\ to activate the Company autocompleter.
+;; We invoke company-try-hard to gather completion candidates from multiple
+;; sources if the active source isn't being very forthcoming.
+(package-require 'company-try-hard)
+(global-set-key (kbd "C-\\") #'company-try-hard)
+(define-key company-active-map (kbd "C-\\") #'company-try-hard)
 
 
 

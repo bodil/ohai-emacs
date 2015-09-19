@@ -62,12 +62,17 @@
 ;; Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
   (interactive)
-  (load-theme 'wombat)
+  (package-require 'material-theme)
+  (load-theme 'material)
 
   (set-face-background 'region "#374186")
   (set-face-background 'fringe "#191919")
-  (set-face-attribute 'linum nil :background nil :height 0.7)
-  (set-face-attribute 'linum-highlight-face nil :foreground "white" :background "#363636" :height 0.7)
+  (set-face-attribute
+   'linum nil
+   :foreground "#678" :background "#1e2125" :height 0.9)
+  (set-face-attribute
+   'linum-highlight-face nil
+   :foreground "#96989c" :background "#263238" :height 0.9)
   (set-face-foreground 'which-func "#7f9f7f")
 
   (set-face-foreground 'term-color-black "#3f3f3f")
@@ -185,6 +190,14 @@
 ;; Display incremental search stats in modeline.
 (package-require 'anzu)
 (global-anzu-mode 1)
+
+;; Handle ANSI colours in compile buffer output.
+;; From https://gist.github.com/jwiegley/8ae7145ba5ce64250a05
+(defun compilation-ansi-color-process-output ()
+  (ansi-color-process-output nil)
+  (set (make-local-variable 'comint-last-output-start)
+       (point-marker)))
+(add-hook 'compilation-filter-hook #'compilation-ansi-color-process-output)
 
 ;; Install the colour scheme according to personal taste.
 (defun ohai-appearance/apply-style ()

@@ -22,6 +22,9 @@
 
 (require 'ohai-lib)
 
+;; Define a keybinding to get to your eshell quickly.
+(global-set-key (kbd "C-c e") 'eshell)
+
 ;; Visual commands are commands which require a proper terminal.
 ;; eshell will run them in a term buffer when you invoke them.
 (setq eshell-visual-commands

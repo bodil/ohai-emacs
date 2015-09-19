@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: js.generator
+# key: gen
+# --
+function*() {$0}
