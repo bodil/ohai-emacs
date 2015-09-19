@@ -139,6 +139,7 @@
 
 ;; Highlight changed areas with certain operations, such as undo, kill, yank.
 (package-require 'volatile-highlights)
+(require 'volatile-highlights)
 (volatile-highlights-mode t)
 
 
