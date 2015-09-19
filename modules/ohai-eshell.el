@@ -32,6 +32,10 @@
 (setq eshell-visual-subcommands
       '(("git" "log" "l" "diff" "show")))
 
+;; Suggest alternatives for mistyped commands.
+(package-require 'eshell-did-you-mean)
+(eshell-did-you-mean-setup)
+
 ;; Define a pretty prompt.
 (defmacro with-face (str &rest properties)
   `(propertize ,str 'face (list ,@properties)))
