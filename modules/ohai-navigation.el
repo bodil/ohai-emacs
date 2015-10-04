@@ -45,13 +45,10 @@
 ;; Consider CamelCase chunks as words when navigating.
 (global-subword-mode 1)
 
-;; Swap buffers in open windows with C-x C-o.
-(package-require 'swap-buffers)
-(global-set-key (kbd "C-x C-o") 'swap-buffers)
-
 ;; Enhance C-x o when more than two windows are open.
 (package-require 'ace-window)
 (global-set-key (kbd "C-x o") 'ace-window)
+(global-set-key (kbd "C-x C-o") 'ace-swap-window)
 
 ;; Use C-x M-p to kill the buffer in the other window, revealing
 ;; the next buffer in the stack.
