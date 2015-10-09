@@ -112,7 +112,13 @@
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
   (tooltip-mode -1)
   (mouse-wheel-mode t)
-  (blink-cursor-mode -1))
+  (blink-cursor-mode -1)
+
+  ;; Engage Nyan Cat!
+  (package-require 'nyan-mode)
+  (nyan-mode 1)
+  (setq nyan-bar-length 16
+	nyan-wavy-trail t))
 
 ;; Show line numbers in buffers.
 (global-linum-mode t)
@@ -140,11 +146,6 @@
 ;; Highlight matching braces.
 (show-paren-mode 1)
 
-;; Engage Nyan Cat!
-(package-require 'nyan-mode)
-(nyan-mode 1)
-(setq nyan-bar-length 16
-      nyan-wavy-trail t)
 
 ;; Unclutter the modeline
 (package-require 'diminish)
