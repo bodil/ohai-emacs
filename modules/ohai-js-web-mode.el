@@ -22,6 +22,7 @@
 
 (require 'ohai-package)
 (require 'ohai-lib)
+(require 'ohai-json)
 
 ;; If npm is installed, add its local prefix to the executable
 ;; search path, which helps Emacs find linters etc.
@@ -38,8 +39,11 @@
 (setq web-mode-content-types-alist
       '(("jsx" . "\\.jsx?$")))
 
-;; But for JSON files, it's better to stick with plain old js-mode.
-(add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
+;; Stop web-mode from using block comments in comment-dwim.
+(setq web-mode-comment-formats
+      (-map-when (lambda (i) (equal (car i) "javascript"))
+                 (lambda (i) '("javascript" . "//"))
+                 web-mode-comment-formats))
 
 ;; Use Tern for smarter JS.
 (package-require 'tern)
