@@ -33,8 +33,8 @@
       '(("git" "log" "l" "diff" "show")))
 
 ;; Suggest alternatives for mistyped commands.
-(package-require 'eshell-did-you-mean)
-(eshell-did-you-mean-setup)
+;; (package-require 'eshell-did-you-mean)
+;; (eshell-did-you-mean-setup)
 
 ;; Define a pretty prompt.
 (package-require 'eshell-git-prompt)
