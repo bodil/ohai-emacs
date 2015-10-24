@@ -22,6 +22,7 @@
 
 (require 'ohai-package)
 (require 'ohai-lib)
+(require 'ohai-json)
 
 ;; If npm is installed, add its local prefix to the executable
 ;; search path, which helps Emacs find linters etc.
@@ -35,9 +36,6 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.es6\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.ejs\\'" . js2-mode))
-
-;; But for JSON files, it's better to stick with plain old js-mode.
-(add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
 
 ;; Configure js2-mode good.
 (setq-default

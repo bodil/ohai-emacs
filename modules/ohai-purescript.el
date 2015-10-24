@@ -80,6 +80,12 @@
         (if (string= ".." (car testpath)) "Main" (s-join "." (cons "Test" testpath)))
       (s-join "." path))))
 
+;; psc-ide
+(setq psc-ide-executable (or (ohai/resolve-exec "psc-ide") "psc-ide"))
+(setq psc-ide-server-executable (or (ohai/resolve-exec "psc-ide-server") "psc-ide-server"))
+(package-require 'psc-ide)
+(add-hook 'purescript-mode-hook 'psc-ide-mode)
+
 
 
 (provide 'ohai-purescript)
