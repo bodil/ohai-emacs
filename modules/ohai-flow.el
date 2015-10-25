@@ -180,7 +180,8 @@
                             (funcall ohai-flow/autocomplete-callback
                                      (-map
                                       (lambda (l) (propertize (cadr l) 'meta (caddr l)))
-                                      (-remove 'null
+                                      (-remove
+                                       'null
                                        (-map
                                         (lambda (s) (s-match "\\([^ ]*\\) \\(.*\\)" s))
                                         (-filter
@@ -220,20 +221,13 @@
 
 ;; Define a Flow checker for Flycheck.
 
-(defun ohai-flow/format-range (s e)
-  (if (eq s e)
-      (format "%d" s)
-    (format "%d,%d" s e)))
-
 (defun ohai-flow/format-message (l)
   (-let [(&alist 'start start 'end end 'line line 'endline endline
                  'path path 'level level 'descr descr) l]
     (if (eq path "")
         descr
-      (format "%s:%s:%s: %s"
-              path
-              (ohai-flow/format-range line endline)
-              (ohai-flow/format-range start end)
+      (format "%s:%s:%s,%s:%s: %s"
+              path line start endline end
               descr))))
 
 (defun ohai-flow/parse-errors (msg checker buffer)
@@ -259,13 +253,39 @@
   (require 'json)
   (require 'ohai-lib)
   (require 'ohai-flycheck)
-  (flycheck-define-checker javascript-flow
+  (flycheck-define-command-checker 'javascript-flow
     "Static type checking using Flow."
-    :command ("flow" "--json" source-original)
-    :error-parser ohai-flow/parse-errors
-    :modes flow-mode)
+    :command (list ohai-flow/flow-binary "--json" 'source-original)
+    :error-parser 'ohai-flow/parse-errors
+    :modes 'flow-mode)
   (add-to-list 'flycheck-checkers 'javascript-flow))
 
+
+
+;; Highlight affiliated errors.
+(defun ohai-flow/highlight-affiliated (errors)
+  (-let* ((locs (-remove
+                 'null
+                 (-map
+                  'ohai-flow/parse-range
+                  (-mapcat
+                   (lambda (err) (s-lines (flycheck-error-message err)))
+                   errors)))))
+    (-each locs
+      (lambda (loc)
+        (-let* (((file startp endp) loc)
+                (start (apply 'ohai-flow/position startp))
+                (end (apply 'ohai-flow/position endp)))
+          (when (equal (buffer-file-name) file)
+            (vhl/add-range start (+ end 1) nil 'flycheck-error)))))))
+
+(add-hook 'next-error-hook
+          (lambda ()
+            (ohai-flow/highlight-affiliated (flycheck-overlay-errors-at (point)))))
+(setq flycheck-display-errors-function
+      (lambda (errors)
+        (ohai-flow/highlight-affiliated errors)
+        (flycheck-display-error-messages errors)))
 
 
 (provide 'ohai-flow)
