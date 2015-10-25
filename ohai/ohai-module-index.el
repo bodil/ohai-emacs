@@ -51,7 +51,8 @@
    (ohai-clojure "Clojure language support" :optional)
    (ohai-erlang "Erlang language support" :optional)
    (ohai-elixir "Elixir language support" :optional)
-   (ohai-haskell "Haskell language support" :optional)))
+   (ohai-haskell "Haskell language support" :optional)
+   (ohai-flow "the Flow type checker for JS" :optional)))
 
 (require 'cl)
 (defcustom ohai/modules (mapcar #'car
