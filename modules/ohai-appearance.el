@@ -65,11 +65,13 @@
   (package-require 'material-theme)
   (load-theme 'material)
 
-  (set-face-background 'region "#374186")
-  (set-face-background 'fringe "#191919")
+  (set-face-background 'default "#000")
+
+  (set-face-background 'region "#223355")
+  (set-face-background 'fringe "#000")
   (set-face-attribute
    'linum nil
-   :foreground "#678" :background "#1e2125" :height 0.9)
+   :foreground "#678" :background "#000" :height 0.9)
   (set-face-attribute
    'linum-highlight-face nil
    :foreground "#96989c" :background "#263238" :height 0.9)
@@ -168,6 +170,7 @@
 (eval-after-load "cider" '(diminish 'cider-mode))
 (eval-after-load "smartparens" '(diminish 'smartparens-mode))
 (eval-after-load "git-gutter" '(diminish 'git-gutter-mode))
+(eval-after-load "volatile-highlights" '(diminish 'volatile-highlights-mode))
 
 (eval-after-load "js2-mode"
   '(defadvice js2-mode (after js2-rename-modeline activate)

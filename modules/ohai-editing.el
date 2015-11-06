@@ -137,6 +137,11 @@
 (package-require 'shrink-whitespace)
 (global-set-key (kbd "C-c DEL") 'shrink-whitespace)
 
+;; Highlight changed areas with certain operations, such as undo, kill, yank.
+(package-require 'volatile-highlights)
+(require 'volatile-highlights)
+(volatile-highlights-mode t)
+
 
 
 (provide 'ohai-editing)

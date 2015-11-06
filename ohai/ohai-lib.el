@@ -49,6 +49,13 @@ the symbol `sym' when rendering."
   "Run a shell command and return its output as a string, whitespace trimmed."
   (s-trim (shell-command-to-string command)))
 
+(defun ohai/exec-with-rc (command &rest args)
+  "Run a shell command and return a list containing two values: its return
+code and its whitespace trimmed output."
+  (with-temp-buffer
+    (list (apply 'call-process command nil (current-buffer) nil args)
+          (s-trim (buffer-string)))))
+
 (defun ohai/is-exec (command)
   "Returns true if `command' is an executable on the system search path."
   (f-executable? (s-trim (shell-command-to-string (s-concat "which " command)))))

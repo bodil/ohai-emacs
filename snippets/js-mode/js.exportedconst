@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: js.exportedconst
+# key: xc
+# --
+export const $1 = $0;
