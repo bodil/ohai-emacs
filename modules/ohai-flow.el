@@ -288,5 +288,16 @@
         (flycheck-display-error-messages errors)))
 
 
+
+;; Tell Flycheck we want to eslint Flow files.
+(with-eval-after-load "flycheck"
+  (flycheck-add-mode 'javascript-eslint 'flow-mode)
+  (setq flycheck-javascript-eslint-executable (or (ohai/resolve-exec "eslint") "eslint")))
+
+;; Use conf-mode when editing `.flowconfig' files.
+(add-to-list 'auto-mode-alist '("\\.flowconfig\\'" . conf-mode))
+
+
+
 (provide 'ohai-flow)
 ;;; ohai-flow.el ends here
