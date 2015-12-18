@@ -38,14 +38,14 @@
 
 ;; When saving an elisp file, remove its compiled version if
 ;; there is one, as you'll want to recompile it.
-(defun remove-elc-on-save ()
+(defun ohai-elisp/remove-elc-on-save ()
   "If you're saving an elisp file, likely the .elc is no longer valid."
   (make-local-variable 'after-save-hook)
   (add-hook 'after-save-hook
             (lambda ()
               (if (file-exists-p (concat buffer-file-name "c"))
                   (delete-file (concat buffer-file-name "c"))))))
-(add-hook 'emacs-lisp-mode-hook 'remove-elc-on-save)
+(add-hook 'emacs-lisp-mode-hook 'ohai-elisp/remove-elc-on-save)
 
 ;; Enable eldoc mode, which provides context based documentation
 ;; in the minibuffer.

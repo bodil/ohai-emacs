@@ -190,10 +190,6 @@
 (defadvice emacs-lisp-mode (after elisp-rename-modeline activate)
   (setq mode-name "ELisp"))
 
-;; Display incremental search stats in modeline.
-(package-require 'anzu)
-(global-anzu-mode 1)
-
 ;; Handle ANSI colours in compile buffer output.
 ;; From https://gist.github.com/jwiegley/8ae7145ba5ce64250a05
 (defun compilation-ansi-color-process-output ()

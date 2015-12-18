@@ -42,6 +42,7 @@
    (ohai-helm "advanced selection and narrowing" :optional)
    (ohai-eshell "the native Emacs shell" :optional)
    (ohai-unicode "enhanced Unicode support (warning: slows startup)" :optional)
+   (ohai-refactor "easy access to refactoring tools" :optional)
    (ohai-emoji "display Unicode emoji even if your system doesn't" :optional)
    (ohai-html "HTML, CSS and friends" :optional)
    (ohai-markdown "Markdown support" :optional)
@@ -51,7 +52,8 @@
    (ohai-clojure "Clojure language support" :optional)
    (ohai-erlang "Erlang language support" :optional)
    (ohai-elixir "Elixir language support" :optional)
-   (ohai-haskell "Haskell language support" :optional)))
+   (ohai-haskell "Haskell language support" :optional)
+   (ohai-flow "the Flow type checker for JS" :optional)))
 
 (require 'cl)
 (defcustom ohai/modules (mapcar #'car
