@@ -42,6 +42,7 @@
    (ohai-helm "advanced selection and narrowing" :optional)
    (ohai-eshell "the native Emacs shell" :optional)
    (ohai-unicode "enhanced Unicode support (warning: slows startup)" :optional)
+   (ohai-emoji "display Unicode emoji even if your system doesn't" :optional)
    (ohai-html "HTML, CSS and friends" :optional)
    (ohai-markdown "Markdown support" :optional)
    (ohai-javascript "JavaScript language support" :optional)
