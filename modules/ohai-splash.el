@@ -86,7 +86,7 @@
 (defun ohai-splash/emergency-puppy (cb)
   (ohai-splash/load-and-match
    "https://twitter.com/EmergencyPuppy/media"
-   "<img class=\"TwitterPhoto-mediaSource\"\n* *src=\"\\([^\"]*\\):large\""
+   "data-image-url=\"\\([^\"]*\\)\""
    "$1" cb))
 
 (defun ohai-splash/daily-otter (cb)

@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; ohai-json.el --- JSON is the Universal Data Format!
+;;; ohai-emoji.el --- Support graphical emoji when font support is missing.
 
 ;; Copyright (C) 2015 Bodil Stokke
 
@@ -18,17 +18,22 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;; Commentary:
-
-;; This file is not a proper module; it's loaded by both ohai-javascript
-;; and ohai-js-web-mode.
-
 ;;; Code:
 
-;; Install json-mode and make its reformat keybinding match the global default.
-;; FIXME: json-mode is currently broken in MELPA. Skip this for now.
-;; (package-require 'json-mode)
-;; (define-key json-mode-map (kbd "C-c <tab>") 'json-mode-beautify)
+(package-require 'emojify)
+(require 'emojify)
 
-(provide 'ohai-json)
-;;; ohai-json.el ends here
+;; Set emojify to only replace Unicode emoji, and do it everywhere.
+(setq emojify-emoji-styles '(unicode)
+      emojify-inhibit-major-modes '())
+
+;; Patch emojify to replace emoji everywhere in programming modes.
+(defun emojify-valid-prog-context-p (beg end) 't)
+
+;; Enable it globally.
+(add-hook 'after-init-hook #'global-emojify-mode)
+
+
+
+(provide 'ohai-emoji)
+;;; ohai-emoji.el ends here
