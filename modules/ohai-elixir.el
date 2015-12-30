@@ -45,10 +45,11 @@
 (with-eval-after-load "flycheck"
   (flycheck-define-checker elixir-mix
     "An Elixir syntax checker using the Elixir interpreter.
-See URL `http://elixir-lang.org/'."
+     See URL `http://elixir-lang.org/'."
     :command ("mix"
               "compile"
               source)
+    :predicate is-mix-project-p
     :error-patterns
     ((error line-start "** (" (zero-or-more not-newline) ") "
             (zero-or-more not-newline) ":" line ": " (message) line-end)
