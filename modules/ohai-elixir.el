@@ -52,9 +52,9 @@
     :predicate is-mix-project-p
     :error-patterns
     ((error line-start "** (" (zero-or-more not-newline) ") "
-            (zero-or-more not-newline) ":" line ": " (message) line-end)
+            (file-name) ":" line ": " (message) line-end)
      (warning line-start
-              (one-or-more (not (syntax whitespace))) ":"
+              (file-name) ":"
               line ": "
               (message)
               line-end))
