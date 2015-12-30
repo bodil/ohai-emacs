@@ -61,7 +61,9 @@
     :modes elixir-mode)
   (add-to-list 'flycheck-checkers 'elixir-mix))
 
-
+(defun is-mix-project-p ()
+  (let ((mix-project-root (locate-dominating-file (buffer-file-name) "mix.exs")))
+    (if mix-project-root (cd mix-project-root) nil)))
 
 (provide 'ohai-elixir)
 ;;; ohai-elixir.el ends here
