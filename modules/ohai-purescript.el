@@ -71,11 +71,11 @@
 ;; We use this in the `ps.module' snippet.
 (defun purescript-module-name-from-current-buffer-file ()
   (let ((path (f-split (f-relative
-                        (f-base (buffer-file-name))
-                        (f-join (projectile-project-root) "src"))))
+                        (f-canonical (f-base (buffer-file-name)))
+                        (f-canonical (f-join (projectile-project-root) "src")))))
         (testpath (f-split (f-relative
-                            (f-base (buffer-file-name))
-                            (f-join (projectile-project-root) "test")))))
+                            (f-canonical (f-base (buffer-file-name)))
+                            (f-canonical (f-join (projectile-project-root) "test"))))))
     (if (string= ".." (car path))
         (if (string= ".." (car testpath)) "Main" (s-join "." (cons "Test" testpath)))
       (s-join "." path))))
