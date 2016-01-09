@@ -26,9 +26,8 @@
 ;;; Code:
 
 ;; Install json-mode and make its reformat keybinding match the global default.
-;; FIXME: json-mode is currently broken in MELPA. Skip this for now.
-;; (package-require 'json-mode)
-;; (define-key json-mode-map (kbd "C-c <tab>") 'json-mode-beautify)
+(package-require 'json-mode)
+(define-key json-mode-map (kbd "C-c <tab>") 'json-mode-beautify)
 
 (provide 'ohai-json)
 ;;; ohai-json.el ends here
