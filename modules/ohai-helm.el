@@ -33,6 +33,8 @@
 (global-set-key (kbd "C-x C-g") 'helm-do-grep)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 (global-set-key (kbd "C-x c g") 'helm-google-suggest)
+(global-set-key (kbd "C-t") 'helm-imenu)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
 
 ;; A binding for using Helm to pick files using Projectile,
 ;; and override the normal grep with a Projectile based grep.
