@@ -171,6 +171,7 @@
 (eval-after-load "smartparens" '(diminish 'smartparens-mode))
 (eval-after-load "git-gutter" '(diminish 'git-gutter-mode))
 (eval-after-load "volatile-highlights" '(diminish 'volatile-highlights-mode))
+(eval-after-load "which-key" '(diminish 'which-key-mode))
 
 (eval-after-load "js2-mode"
   '(defadvice js2-mode (after js2-rename-modeline activate)
