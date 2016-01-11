@@ -20,50 +20,45 @@
 
 ;;; Code:
 
-(package-require 'helm)
-(require 'helm-config)
-(require 'helm)
+(use-package helm
+  :config
+  (require 'helm-config)
+  (require 'helm)
+  ;; Activate Helm.
+  (helm-mode 1)
+  (with-eval-after-load "ohai-project"
+    (use-package helm-projectile
+      ;; A binding for using Helm to pick files using Projectile,
+      ;; and override the normal grep with a Projectile based grep.
+      :bind (("C-c C-f" . helm-projectile-find-file-dwim)
+             ("C-x C-g" . helm-projectile-grep))))
+  ;; Tell Helm to resize the selector as needed.
+  (helm-autoresize-mode 1)
+  ;; Make Helm look nice.
+  (setq-default helm-display-header-line nil
+                helm-autoresize-min-height 10
+                helm-autoresize-max-height 35
+                helm-split-window-in-side-p t
 
-;; Activate Helm.
-(helm-mode 1)
-
-;; Replace common selectors with Helm versions.
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-x C-g") 'helm-do-grep)
-(global-set-key (kbd "C-x b") 'helm-buffers-list)
-(global-set-key (kbd "C-x c g") 'helm-google-suggest)
-(global-set-key (kbd "C-t") 'helm-imenu)
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-
-;; A binding for using Helm to pick files using Projectile,
-;; and override the normal grep with a Projectile based grep.
-(with-eval-after-load "ohai-project"
-  (package-require 'helm-projectile)
-  (global-set-key (kbd "C-c C-f") 'helm-projectile-find-file-dwim)
-  (global-set-key (kbd "C-x C-g") 'helm-projectile-grep))
+                helm-M-x-fuzzy-match t
+                helm-buffers-fuzzy-matching t
+                helm-recentf-fuzzy-match t
+                helm-apropos-fuzzy-match t)
+  (set-face-attribute 'helm-source-header nil :height 0.75)
+  ;; Replace common selectors with Helm versions.
+  :bind (("M-x" . helm-M-x)
+         ("C-x C-f" . helm-find-files)
+         ("C-x C-g" . helm-do-grep)
+         ("C-x b" . helm-buffers-list)
+         ("C-x c g" . helm-google-suggest)
+         ("C-t" . helm-imenu)
+         ("M-y" . helm-show-kill-ring)))
 
 ;; Enrich isearch with Helm using the `C-S-s' binding.
 ;; swiper-helm behaves subtly different from isearch, so let's not
 ;; override the default binding.
-(package-require 'swiper-helm)
-(global-set-key (kbd "C-S-s") 'swiper-helm)
-
-;; Tell Helm to resize the selector as needed.
-(helm-autoresize-mode 1)
-
-;; Make Helm look nice.
-(setq-default helm-display-header-line nil
-              helm-autoresize-min-height 10
-              helm-autoresize-max-height 35
-              helm-split-window-in-side-p t
-
-              helm-M-x-fuzzy-match t
-              helm-buffers-fuzzy-matching t
-              helm-recentf-fuzzy-match t
-              helm-apropos-fuzzy-match t)
-
-(set-face-attribute 'helm-source-header nil :height 0.75)
+(use-package swiper-helm
+  :bind (("C-S-s" . swiper-helm)))
 
 ;; Bind C-c C-e to open a Helm selection of the files in your .emacs.d.
 ;; We get the whole list of files and filter it through `git check-ignore'
@@ -87,9 +82,9 @@
 (defun ohai-helm/files-in-repo (path success error)
   (let ((files (f-files path nil t)))
     (ohai-helm/gitignore path files
-                    (lambda (ignored)
-                      (funcall success (-difference files ignored)))
-                    error)))
+                         (lambda (ignored)
+                           (funcall success (-difference files ignored)))
+                         error)))
 
 (defun ohai-helm/find-files-in-emacs-d ()
   (interactive)

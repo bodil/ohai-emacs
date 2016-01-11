@@ -55,6 +55,12 @@
 (when (not (package-installed-p 'paradox))
   (package-install 'paradox))
 
+(when (not (package-installed-p 'use-package))
+  (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-always-ensure t)
+
 ;; We're going to try to declare the packages each feature needs as we
 ;; define it. To do this, we define a function `(package-require)`
 ;; which will fetch and install a package from the repositories if it

@@ -26,12 +26,9 @@
 ;; f.el    - files and paths  https://github.com/rejeep/f.el
 ;; s.el    - strings          https://github.com/magnars/s.el
 ;; dash.el - lists            https://github.com/magnars/dash.el
-(package-require 'f)
-(require 'f)
-(package-require 's)
-(require 's)
-(package-require 'dash)
-(require 'dash)
+(use-package f)
+(use-package s)
+(use-package dash)
 
 
 

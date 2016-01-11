@@ -30,13 +30,10 @@
        ((equal ohai-personal-taste/splash 'daily-otter)
         '(ohai-splash/daily-otter))))
 
-(package-require 'dash)
-(package-require 's)
-(package-require 'web)
+(use-package dash)
+(use-package s)
+(use-package web)
 
-(require 'dash)
-(require 's)
-(require 'web)
 
 (defun ohai-splash/load-and-map (url map-fn cb)
   (web-http-get

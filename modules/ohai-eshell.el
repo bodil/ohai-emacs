@@ -33,12 +33,14 @@
       '(("git" "log" "l" "diff" "show")))
 
 ;; Suggest alternatives for mistyped commands.
-;; (package-require 'eshell-did-you-mean)
-;; (eshell-did-you-mean-setup)
+;; (use-package eshell-did-you-mean
+;;   :config
+;;   (eshell-did-you-mean-setup))
 
 ;; Define a pretty prompt.
-(package-require 'eshell-git-prompt)
-(eshell-git-prompt-use-theme 'powerline)
+(use-package eshell-git-prompt
+  :config
+  (eshell-git-prompt-use-theme 'powerline))
 
 (setq eshell-cmpl-cycle-completions nil)
 
