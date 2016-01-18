@@ -31,27 +31,32 @@
       ido-use-virtual-buffers t)
 
 ;; Make sure ido is really everywhere.
-(package-require 'ido-ubiquitous)
-(ido-ubiquitous-mode)
+(use-package ido-ubiquitous
+  :config
+  (ido-ubiquitous-mode))
+
 
 ;; Use smex to provide ido-like interface for M-x
-(package-require 'smex)
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-;; This is the old M-x.
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+(use-package smex
+  :config
+  (smex-initialize)
+  :bind (("M-x" . smex)
+         ("M-X" . smex-major-mode-commands)
+         ;; This is the old M-x.
+         ("C-c C-c M-x" . execute-extended-command)))
 
 ;; Vertical ido.
-(package-require 'ido-vertical-mode)
-(ido-vertical-mode)
+(use-package ido-vertical-mode
+  :config
+  (ido-vertical-mode))
 
 ;; Improved fuzzy matching.
-(package-require 'flx-ido)
-(flx-ido-mode 1)
-(setq ido-enable-flex-matching t
-      ido-use-faces nil
-      gc-cons-threshold 20000000)
+(use-package flx-ido
+  :config
+  (flx-ido-mode 1)
+  (setq ido-enable-flex-matching t
+        ido-use-faces nil
+        gc-cons-threshold 20000000))
 
 ;; Bind C-t to use ido to jump to a symbol in the current buffer.
 (require 'imenu)
@@ -103,15 +108,15 @@ Symbols matching the text at point are put first in the completion list."
 ;; Bind `~` to go to homedir when in ido-find-file.
 ;; From http://whattheemacsd.com/setup-ido.el-02.html
 (add-hook 'ido-setup-hook
- (lambda ()
-   ;; Go straight home
-   (define-key ido-file-completion-map
-     (kbd "~")
-     (lambda ()
-       (interactive)
-       (if (looking-back "/")
-           (insert "~/")
-         (call-interactively 'self-insert-command))))))
+          (lambda ()
+            ;; Go straight home
+            (define-key ido-file-completion-map
+              (kbd "~")
+              (lambda ()
+                (interactive)
+                (if (looking-back "/")
+                    (insert "~/")
+                  (call-interactively 'self-insert-command))))))
 
 
 
