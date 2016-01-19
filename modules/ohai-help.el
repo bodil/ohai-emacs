@@ -25,6 +25,7 @@
 ;; which-key prompts you with available options when you type a partial
 ;; command sequence. Try it out: hit C-x and just wait for two seconds.
 (use-package which-key
+  :commands which-key-mode
   :demand t
   :config
   (which-key-mode)
@@ -40,6 +41,7 @@
 ;; Get an instant cheat sheet for your current major mode
 ;; with C-h C-m.
 (use-package discover-my-major
+  :commands (discover-my-major discover-my-mode)
   :bind ("C-h C-m" . discover-my-major))
 
 

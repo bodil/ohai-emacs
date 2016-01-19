@@ -32,10 +32,10 @@
 
 ;; Use web-mode for all JS files.
 (use-package web-mode
+  :mode (("\\.jsx?$" . web-mode)
+         ("\\.es6\\'" . web-mode)
+         ("\\.ejs\\'" . web-mode))
   :config
-  (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.es6\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode))
   (setq web-mode-content-types-alist
         '(("jsx" . "\\.jsx?$")))
   ;; Stop web-mode from using block comments in comment-dwim.
@@ -58,6 +58,7 @@
   ;; Setup Tern as an autocomplete source.
   (with-eval-after-load "company"
     (use-package company-tern
+      :commands company-tern
       :config
       (add-to-list 'company-backends 'company-tern))))
 

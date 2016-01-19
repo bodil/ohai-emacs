@@ -33,10 +33,18 @@
 ;; Install js2-mode, which improves on Emacs's default JS mode
 ;; tremendously.
 (use-package js2-mode
+  :mode (("\\.js$" . js2-mode)
+         ("\\.es6\\'" . js2-mode)
+         ("\\.ejs\\'" . js2-mode))
+  :interpreter "node"
+  :commands js2-mode
   :config
-  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-  (add-to-list 'auto-mode-alist '("\\.es6\\'" . js2-mode))
-  (add-to-list 'auto-mode-alist '("\\.ejs\\'" . js2-mode))
+  ;; Leverage js2-mode to get some refactoring support through js2-refactor.
+  (use-package js2-refactor
+    :commands (js2r-add-keybindings-with-prefix)
+    :init
+    (add-hook 'js2-mode-hook #'js2-refactor-mode)
+    (js2r-add-keybindings-with-prefix "C-c C-m"))
   ;; Configure js2-mode good.
   (setq-default
    js2-mode-indent-ignore-first-tab t
@@ -53,6 +61,7 @@
 
 ;; Use Tern for smarter JS.
 (use-package tern
+  :commands tern-mode
   :config
   (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
   ;; Locate the Tern binary by querying the system search path, which
@@ -63,13 +72,6 @@
     (use-package company-tern
       :config
       (add-to-list 'company-backends 'company-tern))))
-
-;; Leverage js2-mode to get some refactoring support through js2-refactor.
-(use-package js2-refactor
-  :config
-  (add-hook 'js2-mode-hook
-            (lambda ()
-              (js2r-add-keybindings-with-prefix "C-c C-m"))))
 
 
 

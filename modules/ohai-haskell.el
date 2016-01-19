@@ -21,6 +21,7 @@
 ;;; Code:
 
 (use-package haskell-mode
+  :commands haskell-mode
   :config
   ;; Setup haskell-mode hooks
   (custom-set-variables

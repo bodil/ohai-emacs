@@ -24,6 +24,7 @@
 (require 'ohai-appearance)
 
 (use-package company
+  :commands company-mode
   :config
   ;; Enable company-mode globally.
   (global-company-mode)
@@ -67,6 +68,7 @@
   ;; We invoke company-try-hard to gather completion candidates from multiple
   ;; sources if the active source isn't being very forthcoming.
   (use-package company-try-hard
+    :commands company-try-hard
     :bind ("C-\\" . company-try-hard)
     :config
     (bind-keys :map company-active-map

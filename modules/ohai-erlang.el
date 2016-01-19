@@ -24,10 +24,10 @@
 
 ;; Let's use the regular erlang-mode
 (use-package erlang
+  :commands erlang-mode
   :config
   ;; Setup C-c e to add an export clause for the function under cursor.
   (add-hook 'erlang-mode-hook (lambda () (local-set-key "\C-ce" 'erlang-export)))
-
   ;; Avoid Warning about final newline with Erlang mode
   (add-hook 'erlang-mode-hook
             (lambda ()

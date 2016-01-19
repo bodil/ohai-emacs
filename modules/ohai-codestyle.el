@@ -37,6 +37,7 @@
 ;; Use C-c c to instantly clean up your file.
 ;; Read more about ethan-wspace: https://github.com/glasserc/ethan-wspace
 (use-package ethan-wspace
+  :commands ethan-wspace-mode
   :config
   (global-ethan-wspace-mode 1)
   :bind ("C-c c" . ethan-wspace-clean-all)

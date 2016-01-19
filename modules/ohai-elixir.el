@@ -24,20 +24,21 @@
 
 ;; Set up the basic Elixir mode.
 (use-package elixir-mode
+  :commands elixir-mode
   :config
   (add-hook 'elixir-mode-hook 'alchemist-mode))
 
 ;; Alchemist offers integration with the Mix tool.
 (use-package alchemist
-    ;;:commands (alchemist-mode)
-    :config
-    ;; Bind some Alchemist commands to more commonly used keys.
-    (bind-keys :map alchemist-mode-map
-               ("C-c C-l" . (lambda () (interactive)
-                               (save-buffer)
-                               (alchemist-iex-compile-this-buffer))))
-    (bind-keys :map alchemist-mode-map
-               ("C-x C-e" . alchemist-iex-send-current-line)))
+  :commands alchemist-mode
+  :config
+  ;; Bind some Alchemist commands to more commonly used keys.
+  (bind-keys :map alchemist-mode-map
+             ("C-c C-l" . (lambda () (interactive)
+                            (save-buffer)
+                            (alchemist-iex-compile-this-buffer))))
+  (bind-keys :map alchemist-mode-map
+             ("C-x C-e" . alchemist-iex-send-current-line)))
 
 ;; A Flycheck checker that uses Mix, so it finds project deps.
 ;; From https://github.com/ananthakumaran/dotfiles/blob/master/.emacs.d/init-elixir.el#L25-L42

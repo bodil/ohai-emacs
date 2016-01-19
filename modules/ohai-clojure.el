@@ -21,6 +21,7 @@
 ;;; Code:
 
 (use-package clojure-mode
+  :commands clojure-mode
   :config
   ;; Setup
   (add-hook
@@ -33,6 +34,7 @@
      ;; do the trick) and run `M-x monroe' to connect to it and open a REPL
      ;; buffer.
      (use-package monroe
+       :commands monroe
        :config
        (clojure-enable-monroe)
        :bind (
@@ -42,6 +44,7 @@
      ;; We'll also be using clj-refactor for refactoring support. The features
      ;; which require CIDER won't work with Monroe.
      (use-package clj-refactor
+       :commands clj-refactor-mode
        :config
        ;; Define the keybinding prefix for clj-refactor commands.
        ;; From there, see https://github.com/clojure-emacs/clj-refactor.el#usage
@@ -49,7 +52,6 @@
   ;; Monroe doesn't offer any completion support. Let's build on it to
   ;; add a company-mode backend which queries the connected nREPL for
   ;; completions.
-  ;; <shafi>: there should be a better way to do this
   (with-eval-after-load "company"
     (defun monroe-eval-string (s callback)
       (monroe-send-eval-string
@@ -83,11 +85,11 @@
          (cons :async
                (lambda (callback)
                  (monroe-get-completions arg callback))))))
-
     (add-to-list 'company-backends 'company-monroe)))
 
 ;; We might need Paredit too if that's how you like it.
 (use-package paredit
+  :commands paredit-mode
   :diminish paredit-mode)
 
 (provide 'ohai-clojure)

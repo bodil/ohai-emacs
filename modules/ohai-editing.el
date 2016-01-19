@@ -29,6 +29,7 @@
 ;; Bonus: <insert> key no longer activates overwrite mode.
 ;; What is that thing for anyway?
 (use-package multiple-cursors
+  :commands multiple-cursors-mode
   :config
   ;; MC has `mc-hide-unmatched-lines-mode' bound to C-', which interferes
   ;; with our ability to add more cursors, so we'll just clear the binding.
@@ -45,6 +46,7 @@
 ;; Keep hitting C-= to expand it to the next logical unit.
 ;; Protip: this goes really well with multiple cursors.
 (use-package expand-region
+  :commands er/expand-region
   :bind ("C-=" . er/expand-region))
 
 ;; Remap join-line to M-j where it's easier to get to.
@@ -136,10 +138,12 @@
 ;; A key for intelligently shrinking whitespace.
 ;; See https://github.com/jcpetkovich/shrink-whitespace.el for details.
 (use-package shrink-whitespace
+  :commands shrink-whitespace
   :bind ("C-c DEL" . shrink-whitespace))
 
 ;; Highlight changed areas with certain operations, such as undo, kill, yank.
 (use-package volatile-highlights
+  :commands volatile-highlights-mode
   :config
   (volatile-highlights-mode t)
   :diminish volatile-highlights-mode)

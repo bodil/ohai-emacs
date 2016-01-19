@@ -26,6 +26,7 @@
 ;; Learn about Projectile: http://batsov.com/projectile/
 (use-package projectile
   :demand t
+  :commands projectile-global-mode
   :config
   (projectile-global-mode)
   ;; Use C-c C-f to find a file anywhere in the current project.

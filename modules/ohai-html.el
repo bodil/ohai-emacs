@@ -27,17 +27,17 @@
 ;; JSX, various templating systems, etc.
 ;; Learn about web-mode: http://web-mode.org/
 (use-package web-mode
+  :mode (;; We'd like to use web-mode for HTML, instead of the default html-mode.
+         ("\\.html?\\'" . web-mode)
+         ;; Let's add some extensions from the web-mode docs too.
+         ("\\.phtml\\'" . web-mode)
+         ("\\.tpl\\.php\\'" . web-mode)
+         ("\\.[agj]sp\\'" . web-mode)
+         ("\\.as[cp]x\\'" . web-mode)
+         ("\\.erb\\'" . web-mode)
+         ("\\.mustache\\'" . web-mode)
+         ("\\.djhtml\\'" . web-mode))
   :config
-  ;; We'd like to use web-mode for HTML, instead of the default html-mode.
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  ;; Let's add some extensions from the web-mode docs too.
-  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   ;; Highlight the element under the cursor.
   (setq-default web-mode-enable-current-element-highlight t)
   ;; Key for renaming tags

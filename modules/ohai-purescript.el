@@ -25,8 +25,9 @@
 
 ;; Install purescript-mode.
 (use-package purescript-mode
+  :commands purescript-mode
+  :mode (("\\.purs$" . purescript-mode))
   :config
-  (add-to-list 'auto-mode-alist '("\\.purs$" . purescript-mode))
   (add-hook 'purescript-mode-hook 'turn-on-purescript-indentation)
   ;; Change some ASCII art syntax into their corresponding Unicode characters.
   ;; Rebind the same Unicode characters to insert their ASCII art versions
@@ -43,7 +44,7 @@
   (with-eval-after-load "flycheck"
     (flycheck-define-checker pulp
       "Use Pulp to flycheck PureScript code."
-      :command ("pulp" "--monochrome" "build")
+      :commands ("pulp" "--monochrome" "build")
       :error-patterns
       ((error line-start
               (or (and "Error at " (file-name) " line " line ", column " column
