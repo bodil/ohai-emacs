@@ -28,7 +28,7 @@ A full feature list is pending. A quick overview:
 
 - Carefully styled for a fashionable look.
 - Improved navigation, editing and code style settings.
-- Use-package macro to isolate package configurations
+- Use-package macro to isolate package configurations.
 - Magit, the premier git frontend.
 - Smart autocomplete with company-mode.
 - Flycheck.
