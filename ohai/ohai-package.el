@@ -38,6 +38,7 @@
 (setq package-user-dir (concat dotfiles-dir "elpa"))
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 
 ;; To get the package manager going, we invoke its initialise function.
 (package-initialize)
@@ -54,6 +55,12 @@
 ;; already.
 (when (not (package-installed-p 'paradox))
   (package-install 'paradox))
+
+(when (not (package-installed-p 'use-package))
+  (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-always-ensure t)
 
 ;; We're going to try to declare the packages each feature needs as we
 ;; define it. To do this, we define a function `(package-require)`

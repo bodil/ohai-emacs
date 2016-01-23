@@ -24,48 +24,47 @@
 (require 'ohai-project)
 
 ;; Install purescript-mode.
-(package-require 'purescript-mode)
-(require 'purescript-mode)
-(add-to-list 'auto-mode-alist '("\\.purs$" . purescript-mode))
-(add-hook 'purescript-mode-hook 'turn-on-purescript-indentation)
+(use-package purescript-mode
+  :commands purescript-mode
+  :mode (("\\.purs$" . purescript-mode))
+  :config
+  (add-hook 'purescript-mode-hook 'turn-on-purescript-indentation)
+  ;; Change some ASCII art syntax into their corresponding Unicode characters.
+  ;; Rebind the same Unicode characters to insert their ASCII art versions
+  ;; if entered from the keyboard.
+  (with-eval-after-load "purescript-mode"
+    (ohai/font-lock-replace-symbol 'purescript-mode "\\(->\\)" "→")
+    (ohai/font-lock-replace-symbol 'purescript-mode "\\(<-\\)" "←")
+    (ohai/font-lock-replace-symbol 'purescript-mode "\\(=>\\)" "⇒")
+    (define-key purescript-mode-map (kbd "→") (lambda () (interactive) (insert "->")))
+    (define-key purescript-mode-map (kbd "←") (lambda () (interactive) (insert "<-")))
+    (define-key purescript-mode-map (kbd "⇒") (lambda () (interactive) (insert "=>"))))
+  ;; Define a Flycheck checker for running the PureScript compiler through Pulp.
+  ;; This version comes from https://gist.github.com/cabrera/157699749ea71bae7a16
+  (with-eval-after-load "flycheck"
+    (flycheck-define-checker pulp
+      "Use Pulp to flycheck PureScript code."
+      :commands ("pulp" "--monochrome" "build")
+      :error-patterns
+      ((error line-start
+              (or (and "Error at " (file-name) " line " line ", column " column
+                       (one-or-more not-newline)
+                       (message (one-or-more (not (in "*")))))
 
-;; Change some ASCII art syntax into their corresponding Unicode characters.
-;; Rebind the same Unicode characters to insert their ASCII art versions
-;; if entered from the keyboard.
-(with-eval-after-load "purescript-mode"
-  (ohai/font-lock-replace-symbol 'purescript-mode "\\(->\\)" "→")
-  (ohai/font-lock-replace-symbol 'purescript-mode "\\(<-\\)" "←")
-  (ohai/font-lock-replace-symbol 'purescript-mode "\\(=>\\)" "⇒")
-  (define-key purescript-mode-map (kbd "→") (lambda () (interactive) (insert "->")))
-  (define-key purescript-mode-map (kbd "←") (lambda () (interactive) (insert "<-")))
-  (define-key purescript-mode-map (kbd "⇒") (lambda () (interactive) (insert "=>"))))
+                  (and "psc: " (one-or-more not-newline) "\n"
+                       (message (one-or-more not-newline) "\n")
+                       "at \"" (file-name) "\" (line " line ", column " column ")")
+                  (and "Unable to parse module:\n"
+                       "  \"" (file-name) "\" (line " line ", column " column "):\n"
+                       (message (one-or-more not-newline) "\n"
+                                (one-or-more not-newline) "\n"
+                                (one-or-more not-newline) "\n"))
+                  )
 
-;; Define a Flycheck checker for running the PureScript compiler through Pulp.
-;; This version comes from https://gist.github.com/cabrera/157699749ea71bae7a16
-(with-eval-after-load "flycheck"
-  (flycheck-define-checker pulp
-    "Use Pulp to flycheck PureScript code."
-    :command ("pulp" "--monochrome" "build")
-    :error-patterns
-    ((error line-start
-            (or (and "Error at " (file-name) " line " line ", column " column
-                     (one-or-more not-newline)
-                     (message (one-or-more (not (in "*")))))
-
-                (and "psc: " (one-or-more not-newline) "\n"
-                     (message (one-or-more not-newline) "\n")
-                     "at \"" (file-name) "\" (line " line ", column " column ")")
-                (and "Unable to parse module:\n"
-                     "  \"" (file-name) "\" (line " line ", column " column "):\n"
-                     (message (one-or-more not-newline) "\n"
-                              (one-or-more not-newline) "\n"
-                              (one-or-more not-newline) "\n"))
-                )
-
-            line-end
-            ))
-    :modes purescript-mode)
-  (add-to-list 'flycheck-checkers 'pulp))
+              line-end
+              ))
+      :modes purescript-mode)
+    (add-to-list 'flycheck-checkers 'pulp)))
 
 ;; A function for generating a likely module name from the current file path.
 ;; We use this in the `ps.module' snippet.
@@ -80,13 +79,13 @@
         (if (string= ".." (car testpath)) "Main" (s-join "." (cons "Test" testpath)))
       (s-join "." path))))
 
-;; psc-ide
-(setq psc-ide-executable (or (ohai/resolve-exec "psc-ide") "psc-ide"))
-(setq psc-ide-server-executable (or (ohai/resolve-exec "psc-ide-server") "psc-ide-server"))
-(package-require 'psc-ide)
-(add-hook 'purescript-mode-hook 'psc-ide-mode)
-
-
+(use-package psc-ide
+  :init
+  ;; psc-ide
+  (setq psc-ide-executable (or (ohai/resolve-exec "psc-ide") "psc-ide"))
+  (setq psc-ide-server-executable (or (ohai/resolve-exec "psc-ide-server") "psc-ide-server"))
+  :config
+  (add-hook 'purescript-mode-hook 'psc-ide-mode))
 
 (provide 'ohai-purescript)
 ;;; ohai-purescript.el ends here

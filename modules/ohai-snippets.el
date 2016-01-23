@@ -23,16 +23,15 @@
 (require 'ohai-package)
 
 ;; The s.el package contains a lot of functions useful in snippets.
-(package-require 's)
-(require 's)
+(use-package s)
 
 ;; Install yasnippet and make it available globally.
 ;; Read about it here: http://capitaomorte.github.io/yasnippet/
-(package-require 'yasnippet)
-(require 'yasnippet)
-(yas-global-mode 1)
-
-
+(use-package yasnippet
+  ;;:commands yas-global-mode
+  :config
+  (yas-global-mode 1)
+  :diminish yas-minor-mode)
 
 (provide 'ohai-snippets)
 ;;; ohai-snippets.el ends here

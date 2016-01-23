@@ -28,23 +28,26 @@
 ;; Select a region and C-M-' to place cursors on each line of the selection.
 ;; Bonus: <insert> key no longer activates overwrite mode.
 ;; What is that thing for anyway?
-(package-require 'multiple-cursors)
-(global-set-key (kbd "<insert>") 'mc/mark-next-like-this)
-(global-set-key (kbd "S-<insert>") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-'") 'mc/mark-more-like-this-extended)
-(global-set-key (kbd "C-\"") 'mc/mark-all-like-this-dwim)
-(global-set-key (kbd "C-M-'") 'mc/edit-lines)
-
-;; MC has `mc-hide-unmatched-lines-mode' bound to C-', which interferes
-;; with our ability to add more cursors, so we'll just clear the binding.
-;; TODO: add `mc-hide-unmatched-lines-mode' back somewhere else?
-(define-key mc/keymap (kbd "C-'") nil)
+(use-package multiple-cursors
+  :commands multiple-cursors-mode
+  :config
+  ;; MC has `mc-hide-unmatched-lines-mode' bound to C-', which interferes
+  ;; with our ability to add more cursors, so we'll just clear the binding.
+  ;; TODO: add `mc-hide-unmatched-lines-mode' back somewhere else?
+  (bind-keys :map mc/keymap
+             ("C-'" . nil))
+  :bind (("<insert>" . mc/mark-next-like-this)
+	 ("S-<insert>" . mc/mark-previous-like-this)
+	 ("C-'" . mc/mark-more-like-this-extended)
+	 ("C-\"" . mc/mark-all-like-this-dwim)
+	 ("C-M-'" . mc/edit-lines)))
 
 ;; Use C-= to select the innermost logical unit your cursor is on.
 ;; Keep hitting C-= to expand it to the next logical unit.
 ;; Protip: this goes really well with multiple cursors.
-(package-require 'expand-region)
-(global-set-key (kbd "C-=") 'er/expand-region)
+(use-package expand-region
+  :commands er/expand-region
+  :bind ("C-=" . er/expand-region))
 
 ;; Remap join-line to M-j where it's easier to get to.
 ;; join-line will join the line you're on with the line above it
@@ -134,14 +137,15 @@
 
 ;; A key for intelligently shrinking whitespace.
 ;; See https://github.com/jcpetkovich/shrink-whitespace.el for details.
-(package-require 'shrink-whitespace)
-(global-set-key (kbd "C-c DEL") 'shrink-whitespace)
+(use-package shrink-whitespace
+  :commands shrink-whitespace
+  :bind ("C-c DEL" . shrink-whitespace))
 
 ;; Highlight changed areas with certain operations, such as undo, kill, yank.
-(package-require 'volatile-highlights)
-(require 'volatile-highlights)
-(volatile-highlights-mode t)
-
-
+(use-package volatile-highlights
+  :commands volatile-highlights-mode
+  :config
+  (volatile-highlights-mode t)
+  :diminish volatile-highlights-mode)
 
 (provide 'ohai-editing)

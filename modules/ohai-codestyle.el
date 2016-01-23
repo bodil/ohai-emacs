@@ -36,11 +36,16 @@
 ;; and automatically clean up your code when saving.
 ;; Use C-c c to instantly clean up your file.
 ;; Read more about ethan-wspace: https://github.com/glasserc/ethan-wspace
-(package-require 'ethan-wspace)
+(use-package ethan-wspace
+  :demand t
+  :commands global-ethan-wspace-mode
+  :config
+  (global-ethan-wspace-mode 1)
+  :bind ("C-c c" . ethan-wspace-clean-all)
+  :diminish ethan-wspace-mode)
+
 (setq mode-require-final-newline nil)
 (setq require-final-newline nil)
-(global-ethan-wspace-mode 1)
-(global-set-key (kbd "C-c c") 'ethan-wspace-clean-all)
 
 ;; Set default indentation for various languages (add your own!)
 (setq-default tab-width 4)

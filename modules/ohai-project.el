@@ -24,12 +24,13 @@
 
 ;; Install Projectile and activate it for all things.
 ;; Learn about Projectile: http://batsov.com/projectile/
-(package-require 'projectile)
-(projectile-global-mode)
-
-;; Use C-c C-f to find a file anywhere in the current project.
-(global-set-key (kbd "C-c C-f") 'projectile-find-file)
-
-
+(use-package projectile
+  :demand t
+  :commands projectile-global-mode
+  :config
+  (projectile-global-mode)
+  ;; Use C-c C-f to find a file anywhere in the current project.
+  :bind ("C-c C-f" . projectile-find-file)
+  :diminish projectile-mode)
 
 (provide 'ohai-project)
