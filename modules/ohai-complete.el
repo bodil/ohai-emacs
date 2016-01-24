@@ -24,6 +24,7 @@
 (require 'ohai-appearance)
 
 (use-package company
+  :demand t
   :commands company-mode
   :config
   ;; Enable company-mode globally.
