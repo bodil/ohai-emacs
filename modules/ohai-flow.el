@@ -26,7 +26,7 @@
   (add-to-list 'projectile-project-root-files ".flowconfig"))
 
 ;; There's no Flow major mode, so we'll fake it by copying TypeScript's.
-(package-require 'typescript-mode)
+(use-package typescript-mode)
 (define-derived-mode flow-mode typescript-mode "Flow"
   "JavaScript with Flow type checking")
 

@@ -62,7 +62,7 @@
 ;; Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
   (interactive)
-  (package-require 'material-theme)
+  (use-package material-theme)
   (load-theme 'material)
 
   (set-face-background 'default "#000")
@@ -121,8 +121,9 @@
 (setq linum-format (if (not window-system) "%4d " "%4d"))
 
 ;; Highlight the line number of the current line.
-(package-require 'hlinum)
-(hlinum-activate)
+(use-package hlinum
+  :config
+  (hlinum-activate))
 
 ;; Show column numbers in modeline.
 (setq column-number-mode t)
@@ -143,34 +144,27 @@
 (show-paren-mode 1)
 
 ;; Engage Nyan Cat!
-(package-require 'nyan-mode)
-(nyan-mode 1)
-(setq nyan-bar-length 16
-      nyan-wavy-trail t)
+(use-package nyan-mode
+  :config
+  (nyan-mode 1)
+  (setq nyan-bar-length 16
+        nyan-wavy-trail t))
 
 ;; Unclutter the modeline
-(package-require 'diminish)
-(eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
-(eval-after-load "ethan-wspace" '(diminish 'ethan-wspace-mode))
+(use-package diminish)
+
+
 (eval-after-load "eldoc" '(diminish 'eldoc-mode))
-(eval-after-load "rainbow-mode" '(diminish 'rainbow-mode))
-(eval-after-load "paredit" '(diminish 'paredit-mode))
 (eval-after-load "autopair" '(diminish 'autopair-mode))
 (eval-after-load "abbrev" '(diminish 'abbrev-mode))
-(eval-after-load "company" '(diminish 'company-mode))
 (eval-after-load "js2-highlight-vars" '(diminish 'js2-highlight-vars-mode))
-(eval-after-load "projectile" '(diminish 'projectile-mode))
 (eval-after-load "mmm-mode" '(diminish 'mmm-mode))
 (eval-after-load "skewer-html" '(diminish 'skewer-html-mode))
 (eval-after-load "skewer-mode" '(diminish 'skewer-mode))
 (eval-after-load "auto-indent-mode" '(diminish 'auto-indent-minor-mode))
-(eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
 ;; (eval-after-load "subword" '(diminish 'subword-mode))
-(eval-after-load "anzu" '(diminish 'anzu-mode))
 (eval-after-load "cider" '(diminish 'cider-mode))
 (eval-after-load "smartparens" '(diminish 'smartparens-mode))
-(eval-after-load "git-gutter" '(diminish 'git-gutter-mode))
-(eval-after-load "volatile-highlights" '(diminish 'volatile-highlights-mode))
 
 (eval-after-load "js2-mode"
   '(defadvice js2-mode (after js2-rename-modeline activate)

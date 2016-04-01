@@ -27,8 +27,9 @@
 ;; You'll need to make sure the necessary fonts are installed for this to
 ;; work. See https://github.com/rolandwalker/unicode-fonts/#quickstart
 
-(package-require 'unicode-fonts)
-(unicode-fonts-setup)
+(use-package unicode-fonts
+  :config
+  (unicode-fonts-setup))
 
 
 

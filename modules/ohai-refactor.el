@@ -20,13 +20,11 @@
 
 ;;; Code:
 
-(package-require 'emr)
-(add-hook 'prog-mode-hook 'emr-initialize)
-
-;; Just hit M-RET to access your refactoring tools in any supported mode.
-(define-key prog-mode-map (kbd "M-RET") 'emr-show-refactor-menu)
-
-
+(use-package emr
+  :config
+  (add-hook 'prog-mode-hook 'emr-initialize)
+  ;; Just hit M-RET to access your refactoring tools in any supported mode.
+  (define-key prog-mode-map (kbd "M-RET") 'emr-show-refactor-menu))
 
 (provide 'ohai-refactor)
 ;;; ohai-refactor.el ends here

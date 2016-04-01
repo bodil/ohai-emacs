@@ -20,44 +20,39 @@
 
 ;;; Code:
 
-(package-require 'clojure-mode)
-
-;; We'll be using Monroe, a simple nREPL client. To use it, you'll need
-;; to start an nREPL somewhere (running `lein repl' in your project should
-;; do the trick) and run `M-x monroe' to connect to it and open a REPL
-;; buffer.
-(package-require 'monroe)
-
-;; We'll also be using clj-refactor for refactoring support. The features
-;; which require CIDER won't work with Monroe.
-(package-require 'clj-refactor)
-
-;; We might need Paredit too if that's how you like it.
-(package-require 'paredit)
-
-;; Setup
-(add-hook
- 'clojure-mode-hook
- (lambda ()
-   (when ohai-personal-taste/paredit (paredit-mode))
-   (clj-refactor-mode 1)
-   (require 'monroe)
-   (clojure-enable-monroe)))
-
-(with-eval-after-load "clojure-mode"
-  ;; Rebind C-x C-e to eval through nREPL in clojure-mode buffers.
-  (define-key clojure-mode-map (kbd "C-x C-e")
-    'monroe-eval-expression-at-point)
-  ;; Define the keybinding prefix for clj-refactor commands.
-  ;; From there, see https://github.com/clojure-emacs/clj-refactor.el#usage
-  (cljr-add-keybindings-with-prefix "C-c C-m"))
-
-;; Monroe doesn't offer any completion support. Let's build on it to
-;; add a company-mode backend which queries the connected nREPL for
-;; completions.
-(with-eval-after-load "clojure-mode"
+(use-package clojure-mode
+  :commands clojure-mode
+  :config
+  ;; Setup
+  (add-hook
+   'clojure-mode-hook
+   (lambda ()
+     (when ohai-personal-taste/paredit (paredit-mode))
+     (clj-refactor-mode 1)
+     ;; We'll be using Monroe, a simple nREPL client. To use it, you'll need
+     ;; to start an nREPL somewhere (running `lein repl' in your project should
+     ;; do the trick) and run `M-x monroe' to connect to it and open a REPL
+     ;; buffer.
+     (use-package monroe
+       :commands monroe
+       :config
+       (clojure-enable-monroe)
+       :bind (
+              ;; Rebind C-x C-e to eval through nREPL in clojure-mode buffers.
+              :map clojure-mode-map
+                   ("C-x C-e" . monroe-eval-expression-at-point)))
+     ;; We'll also be using clj-refactor for refactoring support. The features
+     ;; which require CIDER won't work with Monroe.
+     (use-package clj-refactor
+       :commands clj-refactor-mode
+       :config
+       ;; Define the keybinding prefix for clj-refactor commands.
+       ;; From there, see https://github.com/clojure-emacs/clj-refactor.el#usage
+       (cljr-add-keybindings-with-prefix "C-c C-m"))))
+  ;; Monroe doesn't offer any completion support. Let's build on it to
+  ;; add a company-mode backend which queries the connected nREPL for
+  ;; completions.
   (with-eval-after-load "company"
-
     (defun monroe-eval-string (s callback)
       (monroe-send-eval-string
        s
@@ -90,8 +85,12 @@
          (cons :async
                (lambda (callback)
                  (monroe-get-completions arg callback))))))
-
     (add-to-list 'company-backends 'company-monroe)))
+
+;; We might need Paredit too if that's how you like it.
+(use-package paredit
+  :commands paredit-mode
+  :diminish paredit-mode)
 
 (provide 'ohai-clojure)
 ;;; ohai-clojure.el ends here

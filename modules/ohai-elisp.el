@@ -26,15 +26,20 @@
 ;; If you're ready for Paredit, let's do Paredit!
 ;; Learn Paredit: http://pub.gajendra.net/src/paredit-refcard.pdf
 (when ohai-personal-taste/paredit
-  (package-require 'paredit)
-  (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode))
-
-;; Setup C-c v to eval whole buffer in all lisps.
-(define-key lisp-mode-shared-map (kbd "C-c v") 'eval-buffer)
+  (use-package paredit
+    :commands paredit-mode
+    :config
+    (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+    ;; Setup C-c v to eval whole buffer in all lisps.
+    (define-key lisp-mode-shared-map (kbd "C-c v") 'eval-buffer)
+    :diminish paredit-mode))
 
 ;; Highlight the sexp under the cursor.
-(package-require 'highlight-parentheses)
-(add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
+(use-package highlight-parentheses
+  :commands highlight-parentheses-mode
+  :config
+  (add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
+  :diminish highlight-parentheses-mode)
 
 ;; When saving an elisp file, remove its compiled version if
 ;; there is one, as you'll want to recompile it.

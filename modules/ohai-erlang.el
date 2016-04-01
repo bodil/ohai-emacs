@@ -23,7 +23,16 @@
 (require 'ohai-package)
 
 ;; Let's use the regular erlang-mode
-(package-require 'erlang)
+(use-package erlang
+  :commands erlang-mode
+  :config
+  ;; Setup C-c e to add an export clause for the function under cursor.
+  (add-hook 'erlang-mode-hook (lambda () (local-set-key "\C-ce" 'erlang-export)))
+  ;; Avoid Warning about final newline with Erlang mode
+  (add-hook 'erlang-mode-hook
+            (lambda ()
+              (setq require-final-newline nil)
+              (setq mode-require-final-newline nil))))
 
 (defun stripwhite (str)
   "Remove any whitespace from STR."
@@ -70,13 +79,6 @@
 (defun erlang-forward-arg ()
   (forward-sexp))
 
-;; Setup C-c e to add an export clause for the function under cursor.
-(add-hook 'erlang-mode-hook (lambda () (local-set-key "\C-ce" 'erlang-export)))
 
-;; Avoid Warning about final newline with Erlang mode
-(add-hook 'erlang-mode-hook
-          (lambda ()
-            (setq require-final-newline nil)
-            (setq mode-require-final-newline nil)))
 
 (provide 'ohai-erlang)
