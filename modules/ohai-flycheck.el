@@ -32,19 +32,20 @@
               (when (not (equal 'emacs-lisp-mode major-mode))
                 (flycheck-mode)))))
 
-;; Jump between current errors with M-n and M-p.
-(global-set-key (kbd "M-n") 'next-error)
-(global-set-key (kbd "M-p") 'previous-error)
+;; Jump between current errors with M-n and M-p, using flycheck-tip
+;; to display errors as tooltips.
+(use-package flycheck-tip
+  :bind (("M-n" . flycheck-tip-cycle)
+         ("M-p" . flycheck-tip-cycle-reverse)))
 
 ;; Turn the modeline red when Flycheck has errors.
 (use-package flycheck-color-mode-line
   :config
-  ;; Configure the theme.
   (with-eval-after-load "flycheck"
     (setq flycheck-highlighting-mode 'symbols)
     (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)))
 
-
+;; Configure the theme.
 (add-hook
  'ohai-appearance/dark-hook
  (lambda ()
