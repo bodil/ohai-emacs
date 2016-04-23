@@ -50,8 +50,9 @@
 ;; Enhance C-x o when more than two windows are open.
 (use-package ace-window
   :bind (("C-x o" . ace-window)
-         ("C-x C-o" . ace-swap-window)))
-
+         ("C-x C-o" . ace-swap-window))
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
 ;; Use C-x M-p to kill the buffer in the other window, revealing
 ;; the next buffer in the stack.
