@@ -154,5 +154,8 @@
   (define-key purescript-mode-map (kbd "C-c M-s")
     'ohai-purescript/insert-suggestion))
 
+;; Stop eldoc's whining.
+(defun purescript-doc-current-info () nil)
+
 (provide 'ohai-purescript)
 ;;; ohai-purescript.el ends here
