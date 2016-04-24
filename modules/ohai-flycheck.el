@@ -22,6 +22,10 @@
 
 (require 'ohai-package)
 
+;; Bind M-n and M-p to navigate to the next/previous errors.
+(global-set-key (kbd "M-n") 'next-error)
+(global-set-key (kbd "M-p") 'previous-error)
+
 ;; Install Flycheck.
 (use-package flycheck
   :config
@@ -30,13 +34,13 @@
   (add-hook 'find-file-hook
             (lambda ()
               (when (not (equal 'emacs-lisp-mode major-mode))
-                (flycheck-mode)))))
+                (flycheck-mode))))
+  (require 'flycheck-tip)
+  (add-hook 'flycheck-mode-hook (lambda ()
+                                  (flycheck-tip-use-timer 'verbose))))
 
-;; Jump between current errors with M-n and M-p, using flycheck-tip
-;; to display errors as tooltips.
-(use-package flycheck-tip
-  :bind (("M-n" . flycheck-tip-cycle)
-         ("M-p" . flycheck-tip-cycle-reverse)))
+;; Display errors as tooltips using flycheck-tip.
+(use-package flycheck-tip)
 
 ;; Turn the modeline red when Flycheck has errors.
 (use-package flycheck-color-mode-line
