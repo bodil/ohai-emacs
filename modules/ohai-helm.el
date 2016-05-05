@@ -31,7 +31,8 @@
       ;; A binding for using Helm to pick files using Projectile,
       ;; and override the normal grep with a Projectile based grep.
       :bind (("C-c C-f" . helm-projectile-find-file-dwim)
-             ("C-x C-g" . helm-projectile-grep))))
+             ("C-x C-g" . helm-projectile-grep))
+      :config (helm-projectile-on)))
   ;; Tell Helm to resize the selector as needed.
   (helm-autoresize-mode 1)
   ;; Make Helm look nice.
@@ -59,6 +60,14 @@
 ;; override the default binding.
 (use-package swiper-helm
   :bind (("C-S-s" . swiper-helm)))
+
+;; Enable fuzzy matching in Helm navigation.
+(use-package "helm-flx"
+  :demand t
+  :config
+  (with-eval-after-load "helm"
+    (require 'helm-flx)
+    (helm-flx-mode 1)))
 
 ;; Bind C-c C-e to open a Helm selection of the files in your .emacs.d.
 ;; We get the whole list of files and filter it through `git check-ignore'
