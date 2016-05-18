@@ -55,8 +55,6 @@
 
 ;; Extend purescript-mode with psc-ide.
 (use-package psc-ide
-  :ensure nil
-  :load-path "site-lisp/psc-ide-emacs"
   :init
   ;; psc-ide
   (setq psc-ide-client-executable (or (ohai/resolve-exec "psc-ide-client") "psc-ide-client"))
@@ -75,7 +73,7 @@ The value of this variable is a list of strings, where each
 string is a name of an error code to ignore (e.g. \"MissingTypeDeclaration\")."
       :type '(repeat :tag "Extensions" (string :tag "Extension"))
       :safe #'flycheck-string-list-p)
-  
+
     (flycheck-define-generic-checker 'flycheck-psc-ide
       "Check buffer using psc-ide rebuild."
       :start (lambda (checker done)
