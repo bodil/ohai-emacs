@@ -73,6 +73,7 @@ Your installed Emacs reports:
 (require 'ohai-update)
 (require 'ohai-personal-taste)
 (require 'ohai-startup-wizard)
+(require 'ohai-set-path)
 
 ;; Load the enabled modules.
 (when (not (boundp 'ohai/wizard-did-run)) (ohai/load-modules))
