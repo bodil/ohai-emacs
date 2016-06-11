@@ -40,6 +40,10 @@
     (define-key purescript-mode-map (kbd "←") (lambda () (interactive) (insert "<-")))
     (define-key purescript-mode-map (kbd "⇒") (lambda () (interactive) (insert "=>")))))
 
+;; Install the psci mode.
+(use-package psci
+  :commands psci)
+
 ;; A function for generating a likely module name from the current file path.
 ;; We use this in the `ps.module' snippet.
 (defun purescript-module-name-from-current-buffer-file ()
