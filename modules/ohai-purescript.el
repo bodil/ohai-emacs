@@ -59,8 +59,6 @@
 
 ;; Extend purescript-mode with psc-ide.
 (use-package psc-ide
-  :ensure nil
-  :load-path "site-lisp/psc-ide-emacs"
   :init
   ;; psc-ide
   (setq psc-ide-client-executable (or (ohai/resolve-exec "psc-ide-client") "psc-ide-client"))
@@ -72,12 +70,20 @@
 ;; Extend Flycheck with psc-ide capabilities.
 (with-eval-after-load "flycheck"
   (when (fboundp 'psc-ide-command-rebuild)
-    (flycheck-define-generic-checker 'psc-ide
+    (flycheck-def-option-var flycheck-psc-ide-ignore-error-codes nil psc
+      "List of psc error codes to ignore.
+
+The value of this variable is a list of strings, where each
+string is a name of an error code to ignore (e.g. \"MissingTypeDeclaration\")."
+      :type '(repeat :tag "Extensions" (string :tag "Extension"))
+      :safe #'flycheck-string-list-p)
+
+    (flycheck-define-generic-checker 'flycheck-psc-ide
       "Check buffer using psc-ide rebuild."
       :start (lambda (checker done)
                (funcall done 'finished (ohai-purescript/rebuild-to-flycheck)))
       :modes 'purescript-mode)
-    (add-to-list 'flycheck-checkers 'psc-ide)
+    (add-to-list 'flycheck-checkers 'flycheck-psc-ide)
 
     (defun ohai-purescript/rebuild-to-flycheck ()
       "Rebuild the current module."
@@ -86,15 +92,16 @@
              (is-success (string= "success" (cdr (assoc 'resultType res))))
              (result (cdr (assoc 'result res))))
         (ohai-purescript/save-suggestions (append result nil))
-        (if (not is-success)
-            (-map (lambda (err)
-                    (ohai-purescript/error 'error err))
-                  result)
-          (if (> (length result) 0)
-              (-map (lambda (err)
-                      (ohai-purescript/error 'warning err))
-                    result)
-            nil))))
+        (-filter (lambda (i) (not (eq i nil)))
+                 (if (not is-success)
+                     (-map (lambda (err)
+                             (ohai-purescript/error 'error err))
+                           result)
+                   (if (> (length result) 0)
+                       (-map (lambda (err)
+                               (ohai-purescript/error 'warning err))
+                             result)
+                     nil)))))
 
     (defun ohai-purescript/save-suggestions (errs)
       (setq-local
@@ -113,12 +120,13 @@
                  errs))))
 
     (defun ohai-purescript/error (severity err)
-      (when (cdr (assoc 'position err))
-        (let* ((err-message (cdr (assoc 'message err)))
-               (err-filename (cdr (assoc 'filename err)))
-               (err-position (cdr (assoc 'position err)))
-               (err-line (cdr (assoc 'startLine err-position)))
-               (err-column (cdr (assoc 'startColumn err-position))))
+      (let* ((err-message (cdr (assoc 'message err)))
+             (err-filename (cdr (assoc 'filename err)))
+             (err-position (cdr (assoc 'position err)))
+             (err-code (cdr (assoc 'errorCode err)))
+             (err-line (cdr (assoc 'startLine err-position)))
+             (err-column (cdr (assoc 'startColumn err-position))))
+        (when (and err-position (not (member err-code flycheck-psc-ide-ignore-error-codes)))
           (flycheck-error-new-at
            err-line
            err-column
