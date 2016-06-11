@@ -34,13 +34,7 @@
   (add-hook 'find-file-hook
             (lambda ()
               (when (not (equal 'emacs-lisp-mode major-mode))
-                (flycheck-mode))))
-  (require 'flycheck-tip)
-  (add-hook 'flycheck-mode-hook (lambda ()
-                                  (flycheck-tip-use-timer 'verbose))))
-
-;; Display errors as tooltips using flycheck-tip.
-(use-package flycheck-tip)
+                (flycheck-mode)))))
 
 ;; Turn the modeline red when Flycheck has errors.
 (use-package flycheck-color-mode-line
