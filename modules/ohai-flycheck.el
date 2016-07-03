@@ -76,6 +76,10 @@
      (set-face-background 'flycheck-color-mode-line-info-face nil)
      (set-face-foreground 'flycheck-color-mode-line-info-face nil))))
 
+(with-eval-after-load "helm"
+  (use-package helm-flycheck
+    :bind (("C-c ! !" . helm-flycheck))))
+
 
 
 (provide 'ohai-flycheck)
