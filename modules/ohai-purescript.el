@@ -28,17 +28,7 @@
   :commands purescript-mode
   :mode (("\\.purs$" . purescript-mode))
   :config
-  (add-hook 'purescript-mode-hook 'turn-on-purescript-indentation)
-  ;; Change some ASCII art syntax into their corresponding Unicode characters.
-  ;; Rebind the same Unicode characters to insert their ASCII art versions
-  ;; if entered from the keyboard.
-  (with-eval-after-load "purescript-mode"
-    (ohai/font-lock-replace-symbol 'purescript-mode "\\(->\\)" "→")
-    (ohai/font-lock-replace-symbol 'purescript-mode "\\(<-\\)" "←")
-    (ohai/font-lock-replace-symbol 'purescript-mode "\\(=>\\)" "⇒")
-    (define-key purescript-mode-map (kbd "→") (lambda () (interactive) (insert "->")))
-    (define-key purescript-mode-map (kbd "←") (lambda () (interactive) (insert "<-")))
-    (define-key purescript-mode-map (kbd "⇒") (lambda () (interactive) (insert "=>")))))
+  (add-hook 'purescript-mode-hook 'turn-on-purescript-indentation))
 
 ;; Install the psci mode.
 (use-package psci
