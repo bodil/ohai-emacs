@@ -48,20 +48,6 @@
     (flycheck-add-mode 'javascript-eslint 'web-mode)
     (setq flycheck-javascript-eslint-executable (or (ohai/resolve-exec "eslint") "eslint"))))
 
-;; Use Tern for smarter JS.
-(use-package tern
-  :config
-  (add-hook 'web-mode-hook (lambda () (tern-mode t)))
-  ;; Locate the Tern binary by querying the system search path, which
-  ;; should now include the local npm prefix.
-  (setq tern-command (list (or (ohai/resolve-exec "tern") "tern")))
-  ;; Setup Tern as an autocomplete source.
-  (with-eval-after-load "company"
-    (use-package company-tern
-      :commands company-tern
-      :config
-      (add-to-list 'company-backends 'company-tern))))
-
 
 
 (provide 'ohai-js-web-mode)
