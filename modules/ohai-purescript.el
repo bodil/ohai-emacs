@@ -51,14 +51,9 @@
 (use-package psc-ide
   :init
   ;; psc-ide
-  (setq psc-ide-client-executable (or (ohai/resolve-exec "psc-ide-client") "psc-ide-client"))
   (setq psc-ide-server-executable (or (ohai/resolve-exec "psc-ide-server") "psc-ide-server"))
-  (setq psc-ide-rebuild-on-save nil)
   :config
   (add-hook 'purescript-mode-hook 'psc-ide-mode))
-
-;; Stop eldoc's whining.
-(defun purescript-doc-current-info () nil)
 
 (provide 'ohai-purescript)
 ;;; ohai-purescript.el ends here
