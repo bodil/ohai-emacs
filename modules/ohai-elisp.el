@@ -56,6 +56,13 @@
 ;; in the minibuffer.
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 
+;; eros-mode will show you the result of evaluating an elisp command
+;; as an overlay in your elisp buffer. Try it out with C-x C-e now!
+(use-package eros
+  :commands eros-mode
+  :config
+  (add-hook 'emacs-lisp-mode-hook 'eros-mode))
+
 ;; Use M-. to jump to the definition of the symbol under the cursor.
 (define-key emacs-lisp-mode-map (kbd "M-.") 'find-function-at-point)
 
