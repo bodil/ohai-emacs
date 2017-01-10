@@ -55,6 +55,8 @@
    (ohai-erlang "Erlang language support" :optional)
    (ohai-elixir "Elixir language support" :optional)
    (ohai-haskell "Haskell language support" :optional)
+   (ohai-groovy "Groovy language support" :optional)
+   (ohai-restclient "Rest client mode" :optional)
    (ohai-flow "the Flow type checker for JS" :optional)))
 
 (require 'cl)
