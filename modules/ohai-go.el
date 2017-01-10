@@ -1,9 +1,9 @@
 ;;; -*- lexical-binding: t -*-
 ;;; ohai-go.el --- Use various go tools to make editing go better with ohai
 
-;; Copyright (C) 2016 Mathew Robinson
+;; Copyright (C) 2016 Bodil Stokke
 
-;; Author: Mathew Robinson <mathew.robinson3114@gmail.com>
+;; Author: Bodil Stokke <bodil@bodil.org>
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
