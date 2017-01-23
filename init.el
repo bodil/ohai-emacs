@@ -20,6 +20,11 @@
 
 ;;; Code:
 
+;; Add some package repositories (fixes https://github.com/bodil/ohai-emacs/issues/27)
+(require 'package)
+(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+
 ;; Do an Emacs version check before going any further.
 (when (or (< emacs-major-version 24)
           (and (= emacs-major-version 24) (< emacs-minor-version 4)))
