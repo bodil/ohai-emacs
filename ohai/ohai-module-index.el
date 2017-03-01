@@ -50,12 +50,13 @@
    (ohai-markdown "Markdown support" :optional)
    (ohai-javascript "JavaScript language support" :optional)
    (ohai-js-web-mode "alternative JS support using web-mode" :optional)
+   (ohai-flow "the Flow type checker for JS" :optional)
    (ohai-purescript "PureScript language support" :optional)
    (ohai-clojure "Clojure language support" :optional)
    (ohai-erlang "Erlang language support" :optional)
    (ohai-elixir "Elixir language support" :optional)
    (ohai-haskell "Haskell language support" :optional)
-   (ohai-flow "the Flow type checker for JS" :optional)))
+   (ohai-rust "Rust language support" :optional)))
 
 (require 'cl)
 (defcustom ohai/modules (mapcar #'car
