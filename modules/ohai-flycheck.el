@@ -23,8 +23,8 @@
 (require 'ohai-package)
 
 ;; Bind M-n and M-p to navigate to the next/previous errors.
-(global-set-key (kbd "M-n") 'next-error)
-(global-set-key (kbd "M-p") 'previous-error)
+(global-set-key (kbd "M-n") 'flycheck-next-error)
+(global-set-key (kbd "M-p") 'flycheck-previous-error)
 
 ;; Install Flycheck.
 (use-package flycheck
