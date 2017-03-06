@@ -31,7 +31,22 @@
 (use-package cargo
   :config
   (add-hook 'rust-mode-hook 'cargo-minor-mode)
-  (setq compilation-ask-about-save nil))
+  (setq compilation-ask-about-save nil)
+  ;; Automatically re-run compilation command on manual save inside a project.
+  ;; Will do nothing if a compilation hasn't been manually triggered
+  ;; in the past.
+  (with-eval-after-load "projectile"
+    (add-hook 'after-save-hook #'ohai-rust/maybe-recompile)))
+
+(defun ohai-rust/maybe-recompile ()
+  (interactive)
+  (when
+      (memq this-command '(save-buffer save-some-buffers))
+    (when (or (eq major-mode 'rust-mode)
+              (equal (f-filename buffer-file-name) "Cargo.toml"))
+      (when compile-history
+        (let ((cmd (car compile-history)))
+          (projectile-run-compilation cmd))))))
 
 
 
