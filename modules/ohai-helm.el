@@ -62,12 +62,19 @@
   :bind (("C-S-s" . swiper-helm)))
 
 ;; Enable fuzzy matching in Helm navigation.
-(use-package "helm-flx"
-  :demand t
+(use-package helm-flx
   :config
   (with-eval-after-load "helm"
     (require 'helm-flx)
     (helm-flx-mode 1)))
+
+;; Set up a couple of tweaks from helm-ext.
+(use-package helm-ext
+  :config
+  (helm-ext-ff-enable-skipping-dots t)
+  (helm-ext-ff-enable-auto-path-expansion t))
+
+
 
 ;; Bind C-c C-e to open a Helm selection of the files in your .emacs.d.
 ;; We get the whole list of files and filter it through `git check-ignore'
