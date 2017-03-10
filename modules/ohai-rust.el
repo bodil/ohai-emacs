@@ -27,7 +27,8 @@
 (use-package racer
   :config
   (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'racer-mode-hook #'eldoc-mode))
+  (add-hook 'racer-mode-hook #'eldoc-mode)
+  :diminish racer-mode)
 (use-package cargo
   :config
   (add-hook 'rust-mode-hook 'cargo-minor-mode)
@@ -36,7 +37,8 @@
   ;; Will do nothing if a compilation hasn't been manually triggered
   ;; in the past.
   (with-eval-after-load "projectile"
-    (add-hook 'after-save-hook #'ohai-rust/maybe-recompile)))
+    (add-hook 'after-save-hook #'ohai-rust/maybe-recompile))
+  :diminish cargo-minor-mode)
 
 (defun ohai-rust/maybe-recompile ()
   (interactive)
