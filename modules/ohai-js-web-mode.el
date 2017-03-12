@@ -41,8 +41,10 @@
   ;; Stop web-mode from using block comments in comment-dwim.
   (setq web-mode-comment-formats
         (-map-when (lambda (i) (equal (car i) "javascript"))
-                   (lambda (i) '("javascript" . "//"))
+                   (lambda (i) (cons (car i) "//"))
                    web-mode-comment-formats))
+  (add-to-list 'web-mode-comment-formats `("jsx" . "//"))
+
   ;; Let Flycheck know that we're using web-mode for JS.
   (with-eval-after-load "flycheck"
     (flycheck-add-mode 'javascript-eslint 'web-mode)
