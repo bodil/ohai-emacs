@@ -66,16 +66,20 @@
   (use-package material-theme)
   (load-theme 'material)
 
-  (set-face-background 'default "#000")
+  ;; (set-face-background 'default "#000")
 
-  (set-face-background 'region "#223355")
-  (set-face-background 'fringe "#000")
+  ;; (set-face-background 'region "#223355")
+  ;; (set-face-background 'fringe "#000")
   (set-face-attribute
    'linum nil
-   :foreground "#678" :background "#000" :height 0.9)
+   :foreground "#678"
+   ;; :background "#000"
+   :height 0.9)
   (set-face-attribute
    'linum-highlight-face nil
-   :foreground "#96989c" :background "#263238" :height 0.9)
+   :foreground "#96989c"
+   ;; :background "#263238"
+   :height 0.9)
   (set-face-foreground 'which-func "#7f9f7f")
 
   (set-face-foreground 'term-color-black "#3f3f3f")
