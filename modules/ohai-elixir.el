@@ -45,22 +45,25 @@
 (with-eval-after-load "flycheck"
   (flycheck-define-checker elixir-mix
     "An Elixir syntax checker using the Elixir interpreter.
-See URL `http://elixir-lang.org/'."
+     See URL `http://elixir-lang.org/'."
     :command ("mix"
               "compile"
               source)
+    :predicate is-mix-project-p
     :error-patterns
     ((error line-start "** (" (zero-or-more not-newline) ") "
-            (zero-or-more not-newline) ":" line ": " (message) line-end)
+            (file-name) ":" line ": " (message) line-end)
      (warning line-start
-              (one-or-more (not (syntax whitespace))) ":"
+              (file-name) ":"
               line ": "
               (message)
               line-end))
     :modes elixir-mode)
   (add-to-list 'flycheck-checkers 'elixir-mix))
 
-
+(defun is-mix-project-p ()
+  (let ((mix-project-root (locate-dominating-file (buffer-file-name) "mix.exs")))
+    (if mix-project-root (cd mix-project-root) nil)))
 
 (provide 'ohai-elixir)
 ;;; ohai-elixir.el ends here
