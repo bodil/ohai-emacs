@@ -20,11 +20,15 @@
 
 ;;; Code:
 
-(use-package flow-mode
+(use-package flycheck-flow)
+
+(use-package company-flow)
+
+(use-package flow-minor-mode
   :config
   (with-eval-after-load 'flycheck
-    (flycheck-add-mode 'javascript-flow 'flow-mode)
-    (flycheck-add-mode 'javascript-eslint 'flow-mode)
+    (flycheck-add-mode 'javascript-flow 'flow-minor-mode)
+    (flycheck-add-mode 'javascript-eslint 'flow-minor-mode)
     (flycheck-add-next-checker 'javascript-flow 'javascript-eslint))
   (with-eval-after-load 'company
     (add-to-list 'company-backends 'company-flow))
