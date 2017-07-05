@@ -37,18 +37,33 @@
   ;; Will do nothing if a compilation hasn't been manually triggered
   ;; in the past.
   (with-eval-after-load "projectile"
-    (add-hook 'after-save-hook #'ohai-rust/maybe-recompile))
+    (bind-key "C-c C-s" #'ohai-rust/save-and-recompile)
+    (bind-key "C-c s" #'ohai-rust/save-all-and-recompile))
   :diminish cargo-minor-mode)
 
-(defun ohai-rust/maybe-recompile ()
+;; (defun ohai-rust/maybe-recompile ()
+;;   (interactive)
+;;   (when
+;;       (memq this-command '(save-buffer save-some-buffers))
+;;     (when (or (eq major-mode 'rust-mode)
+;;               (equal (f-filename buffer-file-name) "Cargo.toml"))
+;;       (when compile-history
+;;         (let ((cmd (car compile-history)))
+;;           (projectile-run-compilation cmd))))))
+
+(defun ohai-rust/save-and-recompile ()
   (interactive)
-  (when
-      (memq this-command '(save-buffer save-some-buffers))
-    (when (or (eq major-mode 'rust-mode)
-              (equal (f-filename buffer-file-name) "Cargo.toml"))
-      (when compile-history
-        (let ((cmd (car compile-history)))
-          (projectile-run-compilation cmd))))))
+  (save-buffer)
+  (when compile-history
+    (let ((cmd (car compile-history)))
+      (projectile-run-compilation cmd))))
+
+(defun ohai-rust/save-all-and-recompile ()
+  (interactive)
+  (save-some-buffers)
+  (when compile-history
+    (let ((cmd (car compile-history)))
+      (projectile-run-compilation cmd))))
 
 
 
