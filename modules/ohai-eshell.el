@@ -42,7 +42,34 @@
   :config
   (eshell-git-prompt-use-theme 'powerline))
 
+;; Disable company-mode for eshell, falling back to pcomplete,
+;; which feels more natural for a shell.
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (company-mode 0)))
+
+;; When completing with multiple options, complete only as much as
+;; possible and wait for further input.
 (setq eshell-cmpl-cycle-completions nil)
+
+;; esh-autosuggest provides fish shell like autosuggestion from history.
+(use-package esh-autosuggest
+  :hook (eshell-mode . esh-autosuggest-mode))
+
+;; Extend pcomplete with smart completion provided by the fish shell, or
+;; bash if fish isn't available.
+(use-package bash-completion
+  :if (ohai/is-exec "bash")
+  :commands bash-completion-dynamic-complete
+  :init
+  (add-hook 'shell-dynamic-complete-functions #'bash-completion-dynamic-complete)
+  (setq fish-completion-fallback-on-bash-p t))
+(use-package fish-completion
+  :if (ohai/is-exec "fish")
+  :config
+  (global-fish-completion-mode))
+
+
 
 (provide 'ohai-eshell)
 ;;; ohai-eshell.el ends here

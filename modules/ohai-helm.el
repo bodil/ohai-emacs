@@ -74,6 +74,11 @@
   (helm-ext-ff-enable-skipping-dots t)
   (helm-ext-ff-enable-auto-path-expansion t))
 
+;; Use Helm to complete with multiple matches in eshell.
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)))
+
 
 
 ;; Bind C-c C-e to open a Helm selection of the files in your .emacs.d.
