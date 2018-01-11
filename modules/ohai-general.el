@@ -52,4 +52,8 @@
    browse-url-browser-function (quote browse-url-generic)
    browse-url-generic-program "xdg-open"))
 
+;; Make compilation buffers scroll to follow the output, but stop scrolling
+;; at the first error.
+(setq compilation-scroll-output 'first-error)
+
 (provide 'ohai-general)
