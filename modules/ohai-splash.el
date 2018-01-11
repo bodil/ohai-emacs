@@ -26,7 +26,7 @@
 (setq ohai-splash/sources
       (cond
        ((equal ohai-personal-taste/splash 'emergency-puppy)
-        '(ohai-splash/emergency-puppy))
+        '(ohai-splash/dog-rates))
        ((equal ohai-personal-taste/splash 'daily-otter)
         '(ohai-splash/daily-otter))))
 
@@ -90,6 +90,12 @@
   (ohai-splash/load-and-match
    "http://dailyotter.org/"
    "<img class=\"aligncenter wp-image-.*src=\"\\([^\"]*\\)\""
+   "$1" cb))
+
+(defun ohai-splash/dog-rates (cb)
+  (ohai-splash/load-and-match
+   "https://twitter.com/dog_rates/media"
+   "data-image-url=\"\\([^\"]*\\)\""
    "$1" cb))
 
 (defun ohai-splash/run (sources cb)
