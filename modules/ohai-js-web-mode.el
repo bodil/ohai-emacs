@@ -26,7 +26,7 @@
 
 ;; If npm is installed, add its local prefix to the executable
 ;; search path, which helps Emacs find linters etc.
-;; This isn't Windows compatible, but then neither is npm, really.
+;; This isn't Windows compatible.
 (-when-let (npm-prefix (ohai/exec-if-exec "npm" "config get prefix"))
   (setenv "PATH" (concat npm-prefix "/bin:" (getenv "PATH"))))
 
@@ -49,6 +49,11 @@
   (with-eval-after-load "flycheck"
     (flycheck-add-mode 'javascript-eslint 'web-mode)
     (setq flycheck-javascript-eslint-executable (or (ohai/resolve-exec "eslint") "eslint"))))
+
+;; Set up LSP support if the LSP module is loaded.
+(with-eval-after-load "ohai-lsp"
+  (use-package lsp-javascript-typescript
+    :hook (web-mode . lsp-javascript-typescript-enable)))
 
 
 

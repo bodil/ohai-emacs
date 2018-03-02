@@ -21,17 +21,20 @@
 ;;; Code:
 
 (use-package rust-mode)
-(use-package flycheck-rust
-  :config
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
-(use-package racer
-  :config
-  (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'racer-mode-hook #'eldoc-mode)
-  :diminish racer-mode)
+
+;; (setenv "RUSTC" (ohai/resolve-exec "rustc"))
+
+;; (use-package flycheck-rust
+;;   :config
+;;   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+;; (use-package racer
+;;   :config
+;;   (add-hook 'rust-mode-hook #'racer-mode)
+;;   (add-hook 'racer-mode-hook #'eldoc-mode)
+;;   :diminish racer-mode)
 (use-package cargo
+  :hook (rust-mode . cargo-minor-mode)
   :config
-  (add-hook 'rust-mode-hook 'cargo-minor-mode)
   (setq compilation-ask-about-save nil)
   ;; Automatically re-run compilation command on manual save inside a project.
   ;; Will do nothing if a compilation hasn't been manually triggered
@@ -41,15 +44,12 @@
     (bind-key "C-c s" #'ohai-rust/save-all-and-recompile))
   :diminish cargo-minor-mode)
 
-;; (defun ohai-rust/maybe-recompile ()
-;;   (interactive)
-;;   (when
-;;       (memq this-command '(save-buffer save-some-buffers))
-;;     (when (or (eq major-mode 'rust-mode)
-;;               (equal (f-filename buffer-file-name) "Cargo.toml"))
-;;       (when compile-history
-;;         (let ((cmd (car compile-history)))
-;;           (projectile-run-compilation cmd))))))
+;; If the LSP module is enabled, set up RLS support.
+(with-eval-after-load "ohai-lsp"
+  (require 'ohai-flycheck)
+  (use-package lsp-rust
+    :hook ((rust-mode . lsp-rust-enable)
+           (rust-mode . flycheck-mode))))
 
 (defun ohai-rust/save-and-recompile ()
   (interactive)

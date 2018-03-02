@@ -46,6 +46,7 @@
    (ohai-emoji "display Unicode emoji even if your system doesn't" :optional)
    (ohai-smart-mode-line "cleaner, lighter modeline (no Nyan Cat)" :optional)
    (ohai-ext-window-nav "alternative window navigation" :optional)
+   (ohai-lsp "Language Server Protocol" :optional)
    (ohai-html "HTML, CSS and friends" :optional)
    (ohai-markdown "Markdown support" :optional)
    (ohai-javascript "JavaScript language support" :optional)
