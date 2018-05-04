@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: len
+# key: len
+# --
+len(&self) -> usize {
+    $0
+}

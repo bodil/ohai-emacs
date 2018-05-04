@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: is_empty
+# key: is_empty
+# --
+is_empty(&self) -> bool {
+    ${0:self.len() == 0}
+}

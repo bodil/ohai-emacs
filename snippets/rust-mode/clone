@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: clone
+# key: clone
+# --
+clone(&self) -> Self {
+    $0
+}
