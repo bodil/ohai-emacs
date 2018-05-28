@@ -37,6 +37,14 @@ A full feature list is pending. A quick overview:
 - Improved JS and HTML modes with powerful refactoring tools.
 - Nyan Cat.
 
+** The Wizard
+
+The Wizard lives at:
+
+#+begin_src sh
+M-x ohai/select-modules
+#+end_src
+
 *** Learning From Emacs Lisp
 
 While Ohai Emacs helps you get started quickly and without frustration, you must eventually learn Emacs Lisp in order to become an Emacs Master. The Ohai Emacs source code contains numerous comments designed to explain, often in detail, what it's doing. The best (if not the fastest) way to learn what Ohai Emacs can do for you is to read the source.
