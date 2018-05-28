@@ -143,9 +143,6 @@
     (ohai-splash/run nil (lambda (img) (ohai-splash/inject-picture img))))
   t)
 
-(when window-system
-  (setq initial-buffer-choice 'ohai-splash/go))
-
 ;; A hack here to force the splash screen after the first run wizard's
 ;; module selection, as `initial-buffer-choice' will already have run.
 (when (boundp 'ohai/wizard-did-run)
