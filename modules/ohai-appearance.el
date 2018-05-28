@@ -140,7 +140,7 @@
 (setq linum-disabled-modes
       '(term-mode slime-repl-mode magit-status-mode help-mode nrepl-mode
         mu4e-main-mode mu4e-headers-mode mu4e-view-mode
-        mu4e-compose-mode))
+        mu4e-compose-mode org-mode))
 (defun linum-on ()
   (unless (or (minibufferp) (member major-mode linum-disabled-modes))
     (linum-mode 1)))
